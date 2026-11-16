@@ -3,292 +3,308 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Кафе на колесах</title>
+<title>Coffee Cart</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-  html, body { margin: 0; background: #1b1d24; color: #eee; font-family: system-ui, sans-serif; }
-  #hud { padding: 8px 12px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; font-size: 14px; }
-  #hud b { color: #ffd166; }
-  .row { display: flex; gap: 6px; flex-wrap: wrap; padding: 4px 12px; }
-  button { background: #2f3445; color: #eee; border: 0; padding: 8px 10px; border-radius: 8px; cursor: pointer; font-size: 14px; }
-  button.active { background: #ffd166; color: #222; }
-  button:disabled { opacity: 0.4; cursor: default; }
-  canvas { display: block; width: 100%; max-width: 800px; margin: 8px auto; background: #242836; border-radius: 10px; }
-  #log { min-height: 22px; padding: 4px 12px; color: #06d6a0; font-size: 14px; }
+:root{--bg:#1e1510;--card:#2d2018;--line:#4a3426;--cream:#f6e7d0;--gold:#f2b24a;--mint:#7bd8a4}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--cream);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
+#app{max-width:820px;margin:0 auto;padding:8px 10px calc(16px + env(safe-area-inset-bottom))}
+#hud{display:flex;gap:8px}
+.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 10px;font-size:12px}
+.stat b{display:block;font-size:19px;color:var(--gold)}
+canvas{width:100%;display:block;border-radius:16px;margin:8px 0;border:1px solid var(--line)}
+#log{min-height:20px;font-size:13px;color:var(--mint);margin-bottom:6px}
+#tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+button{font:inherit;color:var(--cream);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;white-space:nowrap}
+button.on{background:var(--gold);color:#2a1a0c;border-color:var(--gold);font-weight:700}
+button:disabled{opacity:.4;cursor:default}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+#items{display:grid;gap:6px;margin-top:8px}
+.item{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 10px}
+.item .i{font-size:26px}
+.item .t{flex:1;font-size:14px}
+.item .t small{display:block;opacity:.65;font-size:12px;margin-top:2px}
 </style>
 </head>
 <body>
-<div id="hud">
-  <span>Деньги: <b id="money">0</b></span>
-  <span>День: <b id="day">1</b></span>
-  <span>Район: <b id="district">Центр</b></span>
-  <span>Очередь: <b id="queue">0</b>/<span id="maxq">4</span></span>
-  <span>Репутация: <b id="rep">50</b></span>
+<div id="app">
+  <div id="hud">
+    <div class="stat">Деньги<b id="money">0</b></div>
+    <div class="stat">День<b id="day">1</b></div>
+    <div class="stat">Репутация<b id="rep">50</b></div>
+    <div class="stat">Очередь<b id="queue">0</b></div>
+  </div>
+  <canvas id="c" width="800" height="360"></canvas>
+  <div id="log"></div>
+  <div id="tabs"></div>
+  <div id="items"></div>
 </div>
-<div class="row">
-  <button id="beanCheap">Эконом (8)</button>
-  <button id="beanPremium">Премиум (16)</button>
-  <button id="d0">Центр</button>
-  <button id="d1">Вокзал (100)</button>
-  <button id="d2">Парк (200)</button>
-</div>
-<div class="row">
-  <button id="upMachine">Кофемашина</button>
-  <button id="upQueue">Место в очереди</button>
-</div>
-<canvas id="c" width="800" height="360"></canvas>
-<div id="log"></div>
 
 <script>
 const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
+const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+const W = 800, H = 360, GROUND = 292;
 
-const cv = document.getElementById('c');
-const ctx = cv.getContext('2d');
-
-// --- состояние ---
-let money = 0, rep = 50, day = 1, dayTime = 0;
-let machine = 1, maxQueue = 4;
-let beans = 'cheap';
-let district = 0;
-const districts = [
-  { name: 'Центр',  spawn: 4, priceMul: 1.0, unlocked: true,  cost: 0 },
-  { name: 'Вокзал', spawn: 3, priceMul: 1.3, unlocked: false, cost: 100 },
-  { name: 'Парк',   spawn: 6, priceMul: 1.1, unlocked: false, cost: 200 },
+// ---------- данные ----------
+const SKINS = ['#ffdbac', '#f1c27d', '#c68642', '#8d5524', '#5c3a21'];
+const HATS = ['#e8b84a', '#e86a5a', '#5ab0e8', '#7bd8a4', '#f2f2f2'];
+const TYPES = [
+  { k: 'office',  name: 'Офисный',  w: 5,   pat: .05, price: 1 },
+  { k: 'rush',    name: 'Торопыга', w: 2,   pat: .10, price: 1 },
+  { k: 'tourist', name: 'Турист',   w: 1.5, pat: .03, price: 2 },
+  { k: 'critic',  name: 'Критик',   w: 1,   pat: .04, price: .5, rep: 3 }
 ];
-const types = [
-  { name: 'обычный',  color: '#8ecae6', patience: 0.05, price: 1.0, weight: 5 },
-  { name: 'торопыга', color: '#ef476f', patience: 0.10, price: 1.0, weight: 2 },
-  { name: 'турист',   color: '#ffd166', patience: 0.03, price: 2.0, weight: 1 },
-  { name: 'критик',   color: '#b388eb', patience: 0.04, price: 0.5, weight: 1, repBonus: 3 },
+const DIST = [
+  { name: 'Центр',  spawn: 4, mul: 1.0, cost: 0,   sky: ['#f6c58a', '#e8836b'], far: '#7a4a4a' },
+  { name: 'Вокзал', spawn: 3, mul: 1.3, cost: 100, sky: ['#9cc4e8', '#e6d9c4'], far: '#55637a' },
+  { name: 'Парк',   spawn: 6, mul: 1.1, cost: 200, sky: ['#b8e0a0', '#f2e6a8'], far: '#3f7a4a' }
 ];
+const ITEMS = [
+  { id: 'machine', cat: 'eq',    icon: '⚙️', name: 'Кофемашина',      desc: 'Кофе готовится быстрее',    max: 8, cost: l => 50 * (l + 1) },
+  { id: 'queue',   cat: 'eq',    icon: '🧍', name: 'Место в очереди', desc: 'Больше клиентов в очереди', max: 4, cost: l => 80 * (l + 1) },
+  { id: 'helper',  cat: 'eq',    icon: '🧑‍💼', name: 'Помощник',        desc: 'Сам берет заказы',          max: 3, cost: l => 150 * (l + 1) },
+  { id: 'awning',  cat: 'decor', icon: '⛱️', name: 'Навес',           desc: '+10% к цене кофе',          max: 3, cost: l => 120 * (l + 1) },
+  { id: 'sign',    cat: 'decor', icon: '💡', name: 'Вывеска',         desc: 'Клиенты приходят чаще',     max: 3, cost: l => 100 * (l + 1) },
+  { id: 'music',   cat: 'decor', icon: '🎵', name: 'Музыка',          desc: 'Клиенты терпеливее',        max: 3, cost: l => 90 * (l + 1) }
+];
+const CATS = [['eq', '⚙️ Оборудование'], ['beans', '☕ Зерна'], ['decor', '🎨 Декор'], ['map', '🗺️ Районы']];
 
-let customers = [];
-let cooking = null, cookTimer = 0;
-let spawnTimer = 0, eventTimer = 0;
-let rainLeft = 0;
+// ---------- состояние ----------
+const SAVE_KEY = 'coffee-cart-v3';
+let S = { money: 0, rep: 50, day: 1, beans: 'cheap', district: 0, unl: [true, false, false],
+          lv: { machine: 0, queue: 0, helper: 0, awning: 0, sign: 0, music: 0 } };
+let customers = [], cooking = null, cookT = 0, spawnT = 0, eventT = 0, rainLeft = 0;
+let dayT = 0, helperT = 0, floats = [], time = 0, cat = 'eq';
+const maxQ = () => 4 + S.lv.queue;
+const say = m => document.getElementById('log').textContent = m;
 
-const logEl = document.getElementById('log');
-const say = msg => logEl.textContent = msg;
-const beanCost = () => beans === 'cheap' ? 8 : 16;
-const machineCost = () => 50 * machine;
-const queueCost = () => 80 * (maxQueue - 3);
+// ---------- рисование людей ----------
+function rr(x, y, w, h, r, c) { ctx.fillStyle = c; ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
+function ci(x, y, r, c) { ctx.fillStyle = c; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); }
+function poly(pts, c) { ctx.fillStyle = c; ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1])); ctx.fill(); }
 
-function randomType() {
-  const total = types.reduce((s, t) => s + t.weight, 0);
-  let r = Math.random() * total;
-  for (const t of types) { r -= t.weight; if (r <= 0) return t; }
-  return types[0];
-}
+function person(x, y, o) {
+  const k = o.k, b = Math.sin(time * 3 + x * .05) * 1.5;
+  ctx.save(); ctx.translate(x, y);
+  const pants = { office: '#4a4f5c', rush: '#2f3b52', tourist: '#d9c27a', critic: '#1d2433' }[k];
+  const shoes = k === 'rush' ? '#ffffff' : '#15110e';
+  rr(-14, -42, 12, 42, 3, pants); rr(2, -42, 12, 42, 3, pants);
+  rr(-16, -5, 15, 6, 3, shoes); rr(1, -5, 15, 6, 3, shoes);
+  const shirt = { office: '#f4f4f4', rush: '#43b581', tourist: '#ff7b6b', critic: '#1d2433' }[k];
+  rr(-28, -82 + b, 10, 32, 5, shirt); rr(18, -82 + b, 10, 32, 5, shirt);
+  rr(-20, -84 + b, 40, 46, 9, shirt);
+  ci(-23, -47 + b, 5, o.skin); ci(23, -47 + b, 5, o.skin);
+  rr(-5, -93 + b, 10, 10, 3, o.skin);
+  ci(0, -104 + b, 17, o.skin);
+  const hair = { office: '#2b1d14', rush: '#5b3a1e', tourist: '#7a4f24', critic: '#cfcfcf' }[k];
+  ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(0, -107 + b, 17, Math.PI, 0); ctx.fill();
+  if (k === 'critic') { rr(-17, -110 + b, 5, 14, 2, hair); rr(12, -110 + b, 5, 14, 2, hair); }
+  // глаза и улыбка
+  if (k !== 'tourist') { ci(-6, -104 + b, 2, '#222'); ci(6, -104 + b, 2, '#222'); }
+  ctx.strokeStyle = '#7a3b2e'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(0, -99 + b, 5, .25, Math.PI - .25); ctx.stroke();
 
-function spawn(count = 1) {
-  for (let i = 0; i < count; i++) {
-    if (customers.length >= maxQueue) return;
-    customers.push({ x: 0, t: randomType(), patience: 1, served: false });
+  if (k === 'office') {
+    poly([[-4, -84 + b], [4, -84 + b], [3, -58 + b], [0, -53 + b], [-3, -58 + b]], '#2f6fed');
+    ctx.strokeStyle = '#e86a5a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-7, -84 + b); ctx.lineTo(8, -62 + b); ctx.stroke();
+    rr(4, -64 + b, 10, 13, 2, '#fff'); rr(6, -62 + b, 6, 3, 1, '#2f6fed');
   }
+  if (k === 'critic') {
+    poly([[-8, -84 + b], [8, -84 + b], [0, -60 + b]], '#f4f4f4');
+    poly([[-3, -80 + b], [3, -80 + b], [2, -58 + b], [0, -54 + b], [-2, -58 + b]], '#c8362f');
+    rr(-14, -72 + b, 5, 3, 1, '#f2b24a');
+    ctx.strokeStyle = '#222'; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.arc(-6, -104 + b, 5, 0, 7); ctx.arc(6, -104 + b, 5, 0, 7); ctx.moveTo(-1, -104 + b); ctx.lineTo(1, -104 + b); ctx.stroke();
+    rr(17, -42 + b, 22, 17, 3, '#7a4b2f'); rr(24, -45 + b, 8, 4, 2, '#4a2c19');
+  }
+  if (k === 'tourist') {
+    ctx.fillStyle = 'rgba(255,255,255,.55)';
+    [[-12, -74], [6, -68], [-4, -56], [12, -78], [-14, -48]].forEach(d => ci(d[0], d[1] + b, 2.4, ctx.fillStyle));
+    rr(-11, -106 + b, 9, 5, 2, '#111'); rr(2, -106 + b, 9, 5, 2, '#111');
+    ctx.fillStyle = o.hat; ctx.beginPath(); ctx.ellipse(0, -116 + b, 28, 6, 0, 0, 7); ctx.fill();
+    ctx.beginPath(); ctx.arc(0, -116 + b, 14, Math.PI, 0); ctx.fill();
+    rr(-14, -121 + b, 28, 4, 1, 'rgba(0,0,0,.25)');
+    rr(-8, -66 + b, 16, 11, 3, '#222'); ci(0, -60 + b, 3.5, '#6a8fb0');
+  }
+  if (k === 'rush') {
+    rr(-17, -113 + b, 34, 5, 2, '#e8453a');
+    ctx.fillStyle = hair; [-10, -3, 4, 11].forEach(px => poly([[px - 3, -118 + b], [px, -126 + b], [px + 3, -118 + b]], hair));
+    rr(-20, -66 + b, 40, 5, 0, 'rgba(255,255,255,.7)');
+  }
+  ctx.restore();
 }
 
-function layoutQueue() {
-  customers.forEach((c, i) => c.x = 760 - i * 90);
-}
-
-// --- события ---
-const events = [
-  { name: 'Жара: молоко портится, один клиент уходит',
-    run() { const c = customers.find(x => !x.served); if (c) c.patience = 0; } },
-  { name: 'Проверка СЭС: штраф 30',
-    run() { if (money >= 30) { money -= 30; say('Заплатил штраф 30'); } else { rep = Math.max(0, rep - 10); say('Нечем платить, репутация падает'); } } },
-  { name: 'Туристический автобус: толпа гостей!',
-    run() { spawn(3); } },
-  { name: 'Дождь: клиентов меньше на время',
-    run() { rainLeft = 15; } },
-];
-
-// --- сохранение ---
-const SAVE_KEY = 'coffee-cart-save';
-function saveState() {
-  const data = JSON.stringify({ money, rep, day, machine, maxQueue, beans, district,
-    unlocked: districts.map(d => d.unlocked) });
-  try {
-    if (tg && tg.CloudStorage) tg.CloudStorage.setItem(SAVE_KEY, data);
-    else localStorage.setItem(SAVE_KEY, data);
-  } catch (e) {}
-}
-function applyState(s) {
-  if (!s) return;
-  money = s.money ?? money; rep = s.rep ?? rep; day = s.day ?? day;
-  machine = s.machine ?? machine; maxQueue = s.maxQueue ?? maxQueue;
-  beans = s.beans ?? beans; district = s.district ?? district;
-  if (s.unlocked) s.unlocked.forEach((u, i) => districts[i].unlocked = u);
-}
-function loadState() {
-  return new Promise(resolve => {
-    try {
-      if (tg && tg.CloudStorage) {
-        tg.CloudStorage.getItem(SAVE_KEY, (err, val) => {
-          resolve(!err && val ? JSON.parse(val) : null);
-        });
-      } else {
-        const v = localStorage.getItem(SAVE_KEY);
-        resolve(v ? JSON.parse(v) : null);
-      }
-    } catch (e) { resolve(null); }
-  });
-}
-setInterval(saveState, 5000);
-
-// --- управление ---
-cv.addEventListener('click', e => {
-  const r = cv.getBoundingClientRect();
-  const mx = (e.clientX - r.left) * (cv.width / r.width);
-  const my = (e.clientY - r.top) * (cv.height / r.height);
-  for (const c of customers) {
-    if (!c.served && Math.abs(mx - c.x) < 35 && my > 120 && my < 230) {
-      if (cooking === null) { cooking = c; cookTimer = 0; }
-      return;
+// ---------- сцена ----------
+function drawBg() {
+  const d = DIST[S.district];
+  const g = ctx.createLinearGradient(0, 0, 0, GROUND); g.addColorStop(0, d.sky[0]); g.addColorStop(1, d.sky[1]);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  if (S.district === 2) {
+    for (let i = 0; i < 9; i++) { const x = 40 + i * 95, h = 60 + (i * 37 % 50); rr(x - 6, GROUND - h, 12, h, 3, '#5a3b24'); ci(x, GROUND - h, 34 + (i % 3) * 6, d.far); }
+  } else {
+    for (let i = 0; i < 12; i++) {
+      const w = 60 + (i * 29 % 30), h = 90 + (i * 53 % 110), x = i * 68;
+      ctx.fillStyle = d.far; ctx.fillRect(x, GROUND - h, w, h);
+      ctx.fillStyle = 'rgba(255,230,150,.55)';
+      for (let r = 0; r < h - 20; r += 22) for (let c = 8; c < w - 10; c += 18) if ((i + r + c) % 3) ctx.fillRect(x + c, GROUND - h + 10 + r, 8, 10);
     }
   }
-});
-
-document.getElementById('beanCheap').onclick = () => { beans = 'cheap'; };
-document.getElementById('beanPremium').onclick = () => { beans = 'premium'; };
-[0, 1, 2].forEach(i => document.getElementById('d' + i).onclick = () => {
-  const d = districts[i];
-  if (!d.unlocked && money >= d.cost) { money -= d.cost; d.unlocked = true; }
-  if (d.unlocked) { district = i; say('Переехал в район: ' + d.name); }
-});
-document.getElementById('upMachine').onclick = () => {
-  if (money >= machineCost()) { money -= machineCost(); machine++; }
-};
-document.getElementById('upQueue').onclick = () => {
-  if (money >= queueCost() && maxQueue < 8) { money -= queueCost(); maxQueue++; }
-};
-
-// --- цикл ---
-let last = performance.now();
-function loop(now) {
-  const dt = Math.min((now - last) / 1000, 0.1);
-  last = now;
-
-  dayTime += dt;
-  if (dayTime > 90) { dayTime = 0; day++; say('Новый день: ' + day); }
-
-  const d = districts[district];
-  const rainMul = rainLeft > 0 ? 0.4 : 1;
-  if (rainLeft > 0) rainLeft -= dt;
-
-  spawnTimer += dt;
-  if (spawnTimer > d.spawn / rainMul) { spawn(1); spawnTimer = 0; }
-
-  eventTimer += dt;
-  if (eventTimer > 20) {
-    eventTimer = 0;
-    const ev = events[Math.floor(Math.random() * events.length)];
-    say(ev.name);
-    ev.run();
+  if (S.district === 1) {
+    rr(240, 226, 460, 54, 10, '#c7463d'); rr(240, 262, 460, 8, 0, '#8e2f29');
+    for (let i = 0; i < 9; i++) rr(256 + i * 50, 236, 34, 18, 3, '#cfe6f5');
   }
+  ctx.fillStyle = '#5a4a3f'; ctx.fillRect(0, GROUND, W, H - GROUND);
+  ctx.fillStyle = '#6d5b4d'; ctx.fillRect(0, GROUND, W, 6);
+}
 
-  const beanMul = beans === 'premium' ? 0.6 : 1;
-  for (const c of customers) if (!c.served) c.patience -= dt * c.t.patience * beanMul;
-
-  customers.forEach(c => {
-    if (!c.served && c.patience <= 0) { rep = Math.max(0, rep - 2); c.gone = true; }
-  });
-  customers = customers.filter(c => !c.gone);
-  if (cooking && cooking.gone) cooking = null;
-  layoutQueue();
-
-  if (cooking) {
-    cookTimer += dt * (0.6 + machine * 0.3);
-    if (cookTimer >= 1) {
-      const base = 10 + machine * 2;
-      money += Math.round(base * cooking.t.price * d.priceMul);
-      rep = Math.min(100, rep + (cooking.t.repBonus || 1));
-      cooking.served = true;
-      cooking = null;
-      customers = customers.filter(c => !c.served);
-      layoutQueue();
-    }
-  }
-
-  draw();
-  updateHud();
-  requestAnimationFrame(loop);
+function drawCart() {
+  // барыга: ты, офисный работник
+  person(135, 270, { k: 'office', skin: '#f1c27d' });
+  // прилавок
+  rr(30, 222, 210, 72, 6, '#7a4b2f');
+  for (let i = 0; i < 4; i++) rr(36, 232 + i * 14, 198, 2, 1, 'rgba(0,0,0,.18)');
+  rr(24, 214, 222, 12, 4, '#a9714b');
+  rr(188, 198, 14, 16, 3, '#f6e7d0'); rr(200, 202, 5, 8, 2, '#f6e7d0');
+  if (cooking) { ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(193 + Math.sin(time * 5) * 2, 194); ctx.bezierCurveTo(188, 184, 200, 180, 194, 170); ctx.stroke(); }
+  // навес
+  for (let i = 0; i < 10; i++) { const c = i % 2 ? '#f6e7d0' : '#d6483a'; ctx.fillStyle = c; ctx.fillRect(30 + i * 21, 100, 21, 36); ci(40.5 + i * 21, 136, 10.5, c); }
+  rr(26, 94, 218, 10, 4, '#8e2f29');
+  rr(30, 104, 6, 118, 2, '#5a3b24'); rr(234, 104, 6, 118, 2, '#5a3b24');
+  // вывеска
+  rr(58, 56, 164, 34, 8, '#2a1a0c'); ctx.strokeStyle = '#f2b24a'; ctx.lineWidth = 2; ctx.strokeRect(62, 60, 156, 26);
+  ctx.fillStyle = '#f2b24a'; ctx.font = 'bold 18px "Trebuchet MS",sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('☕ Coffee Cart', 140, 79);
+  // колеса
+  ci(72, 296, 17, '#222'); ci(72, 296, 7, '#999'); ci(200, 296, 17, '#222'); ci(200, 296, 7, '#999');
+  // прогресс
+  if (cooking) { rr(50, 262, 170, 8, 4, 'rgba(0,0,0,.4)'); rr(50, 262, 170 * Math.min(cookT, 1), 8, 4, '#f2b24a'); }
+  ctx.textAlign = 'left';
 }
 
 function draw() {
-  ctx.clearRect(0, 0, cv.width, cv.height);
-
-  ctx.fillStyle = '#2b3042';
-  ctx.fillRect(0, 0, cv.width, 90);
-  ctx.fillStyle = '#eee';
-  ctx.font = '16px system-ui';
-  ctx.fillText('Район: ' + districts[district].name + (rainLeft > 0 ? '  (дождь)' : ''), 16, 26);
-
-  ctx.fillStyle = '#5c4033';
-  ctx.fillRect(40, 260, 200, 60);
-  ctx.fillStyle = '#8d6e63';
-  ctx.fillRect(40, 250, 200, 12);
-  ctx.fillStyle = '#ffd166';
-  ctx.font = '14px system-ui';
-  ctx.fillText('Кофе-тележка', 60, 298);
-
-  for (const c of customers) {
-    ctx.fillStyle = c.t.color;
-    ctx.beginPath();
-    ctx.arc(c.x, 180, 25, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#eee';
-    ctx.font = '12px system-ui';
-    ctx.fillText(c.t.name, c.x - 26, 224);
-    ctx.fillStyle = '#444';
-    ctx.fillRect(c.x - 25, 118, 50, 6);
-    ctx.fillStyle = c.patience > 0.3 ? '#06d6a0' : '#ef476f';
-    ctx.fillRect(c.x - 25, 118, 50 * Math.max(c.patience, 0), 6);
-  }
-
-  ctx.fillStyle = '#333';
-  ctx.fillRect(250, 335, 300, 14);
-  ctx.font = '14px system-ui';
-  if (cooking) {
-    ctx.fillStyle = '#ffd166';
-    ctx.fillRect(250, 335, 300 * Math.min(cookTimer, 1), 14);
-    ctx.fillStyle = '#eee';
-    ctx.fillText('Готовлю кофе...', 250, 328);
-  } else {
-    ctx.fillStyle = '#aaa';
-    ctx.fillText('Нажми на клиента, чтобы начать заказ', 250, 328);
-  }
-}
-
-function updateHud() {
-  document.getElementById('money').textContent = Math.floor(money);
-  document.getElementById('day').textContent = day;
-  document.getElementById('district').textContent = districts[district].name;
-  document.getElementById('queue').textContent = customers.length;
-  document.getElementById('maxq').textContent = maxQueue;
-  document.getElementById('rep').textContent = Math.floor(rep);
-
-  document.getElementById('beanCheap').textContent = 'Эконом (8)';
-  document.getElementById('beanPremium').textContent = 'Премиум (16)';
-  document.getElementById('beanCheap').classList.toggle('active', beans === 'cheap');
-  document.getElementById('beanPremium').classList.toggle('active', beans === 'premium');
-  [0, 1, 2].forEach(i => {
-    const b = document.getElementById('d' + i);
-    b.classList.toggle('active', district === i);
-    b.disabled = !districts[i].unlocked && money < districts[i].cost;
+  drawBg(); drawCart();
+  customers.forEach(c => {
+    person(c.x, 300, { k: c.t.k, skin: c.skin, hat: c.hat });
+    rr(c.x - 24, 158, 48, 6, 3, 'rgba(0,0,0,.45)');
+    rr(c.x - 24, 158, 48 * Math.max(c.p, 0), 6, 3, c.p > .35 ? '#7bd8a4' : '#e8453a');
+    ctx.fillStyle = '#fff'; ctx.font = '11px "Trebuchet MS",sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(c.t.name, c.x, 322); ctx.textAlign = 'left';
+    if (c === cooking) { ctx.strokeStyle = '#f2b24a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(c.x, 302, 26, 6, 0, 0, 7); ctx.stroke(); }
   });
-
-  document.getElementById('upMachine').textContent = 'Кофемашина (' + machineCost() + ')';
-  document.getElementById('upMachine').disabled = money < machineCost();
-  document.getElementById('upQueue').textContent = maxQueue < 8 ? 'Место в очереди (' + queueCost() + ')' : 'Очередь максимум';
-  document.getElementById('upQueue').disabled = money < queueCost() || maxQueue >= 8;
+  floats.forEach(f => { ctx.globalAlpha = Math.max(f.life, 0); ctx.fillStyle = f.c; ctx.font = 'bold 18px "Trebuchet MS",sans-serif'; ctx.fillText(f.text, f.x, f.y); ctx.globalAlpha = 1; });
+  if (rainLeft > 0) {
+    ctx.fillStyle = 'rgba(20,30,50,.18)'; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(200,220,255,.6)'; ctx.lineWidth = 1.5; ctx.beginPath();
+    for (let i = 0; i < 70; i++) { const x = (i * 97 + time * 300) % W, y = (i * 53 + time * 500) % H; ctx.moveTo(x, y); ctx.lineTo(x - 4, y + 12); }
+    ctx.stroke();
+  }
 }
 
-loadState().then(s => {
-  applyState(s);
-  requestAnimationFrame(loop);
+// ---------- логика ----------
+function pick() { let r = Math.random() * TYPES.reduce((s, t) => s + t.w, 0); for (const t of TYPES) { r -= t.w; if (r <= 0) return t; } return TYPES[0]; }
+function spawn(n = 1) {
+  for (let i = 0; i < n; i++) {
+    if (customers.length >= maxQ()) return;
+    customers.push({ t: pick(), p: 1, x: 840, skin: SKINS[Math.random() * SKINS.length | 0], hat: HATS[Math.random() * HATS.length | 0] });
+  }
+}
+const EVENTS = [
+  ['Жара: молоко портится, один клиент уходит', () => { const c = customers.find(x => x !== cooking); if (c) c.p = 0; }],
+  ['Проверка СЭС: штраф 30', () => { if (S.money >= 30) S.money -= 30; else { S.rep = Math.max(0, S.rep - 10); say('Нечем платить штраф, репутация падает'); } }],
+  ['Автобус с туристами: толпа гостей!', () => spawn(3)],
+  ['Дождь: клиентов станет меньше', () => { rainLeft = 15; }]
+];
+
+cv.addEventListener('click', e => {
+  const r = cv.getBoundingClientRect(), mx = (e.clientX - r.left) * W / r.width, my = (e.clientY - r.top) * H / r.height;
+  if (cooking || my < 150 || my > 330) return;
+  const c = customers.find(c => Math.abs(mx - c.x) < 32);
+  if (c) { cooking = c; cookT = 0; }
 });
+
+function frame(now) {
+  const dt = Math.min((now - (frame.last || now)) / 1000, .1); frame.last = now; time += dt;
+  const d = DIST[S.district], lv = S.lv, prem = S.beans === 'premium';
+  dayT += dt; if (dayT > 90) { dayT = 0; S.day++; say('Новый день: ' + S.day); }
+  const rain = rainLeft > 0 ? .4 : 1; if (rainLeft > 0) rainLeft -= dt;
+  spawnT += dt; if (spawnT > d.spawn * (1 - .08 * lv.sign) / rain) { spawn(); spawnT = 0; }
+  eventT += dt; if (eventT > 25) { eventT = 0; const ev = EVENTS[Math.random() * EVENTS.length | 0]; say(ev[0]); ev[1](); }
+
+  customers.forEach(c => { c.p -= dt * c.t.pat * (prem ? .6 : 1) * (1 - .08 * lv.music); });
+  customers.filter(c => c.p <= 0).forEach(c => { S.rep = Math.max(0, S.rep - 2); floats.push({ x: c.x - 20, y: 150, text: 'Ушел', c: '#e8453a', life: 1 }); if (c === cooking) cooking = null; });
+  customers = customers.filter(c => c.p > 0);
+  customers.forEach((c, i) => { c.x += (330 + i * 62 - c.x) * Math.min(1, dt * 6); });
+
+  if (!cooking && lv.helper && customers.length) { helperT += dt; if (helperT > 3.5 - lv.helper) { cooking = customers[0]; cookT = 0; helperT = 0; } } else helperT = 0;
+  if (cooking) {
+    cookT += dt * (0.9 + lv.machine * 0.3);
+    if (cookT >= 1) {
+      const gain = Math.round((12 + lv.machine * 2) * cooking.t.price * d.mul * (1 + .1 * lv.awning) * (prem ? 1.25 : 1)) - (prem ? 6 : 3);
+      S.money += gain; S.rep = Math.min(100, S.rep + (cooking.t.rep || 1));
+      floats.push({ x: cooking.x - 14, y: 150, text: '+' + gain, c: '#f2b24a', life: 1 });
+      customers = customers.filter(c => c !== cooking); cooking = null;
+    }
+  }
+  floats.forEach(f => { f.y -= dt * 30; f.life -= dt; }); floats = floats.filter(f => f.life > 0);
+
+  draw(); hud(); requestAnimationFrame(frame);
+}
+
+// ---------- интерфейс ----------
+function hud() {
+  money.textContent = Math.floor(S.money); day.textContent = S.day; rep.textContent = Math.floor(S.rep);
+  queue.textContent = customers.length + '/' + maxQ();
+}
+function renderShop() {
+  tabs.innerHTML = CATS.map(([k, n]) => `<button class="${k === cat ? 'on' : ''}" data-cat="${k}">${n}</button>`).join('');
+  let h = '';
+  const row = (i, t, s, btn) => `<div class="item"><span class="i">${i}</span><div class="t">${t}<small>${s}</small></div>${btn}</div>`;
+  if (cat === 'beans') {
+    [['cheap', '🫘', 'Эконом', 'Стоит 3 за чашку'], ['premium', '☕', 'Премиум', 'Цена кофе +25%, клиенты терпеливее, стоит 6 за чашку']].forEach(([k, i, n, s]) =>
+      h += row(i, n, s, `<button class="${S.beans === k ? 'on' : ''}" data-bean="${k}">${S.beans === k ? 'Выбрано' : 'Выбрать'}</button>`));
+  } else if (cat === 'map') {
+    DIST.forEach((d, i) => {
+      const btn = S.unl[i] ? `<button class="${S.district === i ? 'on' : ''}" data-dist="${i}">${S.district === i ? 'Здесь' : 'Поехать'}</button>`
+        : `<button data-dist="${i}" data-cost="${d.cost}">Открыть ${d.cost}</button>`;
+      h += row(['🏙️', '🚉', '🌳'][i], d.name, 'Цена кофе x' + d.mul + ', клиенты каждые ~' + d.spawn + ' сек', btn);
+    });
+  } else {
+    ITEMS.filter(x => x.cat === cat).forEach(x => {
+      const l = S.lv[x.id], maxed = l >= x.max, c = x.cost(l);
+      h += row(x.icon, `${x.name} (${l}/${x.max})`, x.desc, maxed ? '<button disabled>Максимум</button>' : `<button data-buy="${x.id}" data-cost="${c}">${c}</button>`);
+    });
+  }
+  items.innerHTML = h; updateShop();
+}
+function updateShop() { document.querySelectorAll('[data-cost]').forEach(b => b.disabled = S.money < +b.dataset.cost); }
+document.getElementById('app').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const d = b.dataset;
+  if (d.cat) cat = d.cat;
+  else if (d.buy) { const x = ITEMS.find(i => i.id === d.buy), c = x.cost(S.lv[x.id]); if (S.money >= c && S.lv[x.id] < x.max) { S.money -= c; S.lv[x.id]++; save(); } }
+  else if (d.bean) { S.beans = d.bean; save(); }
+  else if (d.dist) { const i = +d.dist, dd = DIST[i]; if (!S.unl[i] && S.money >= dd.cost) { S.money -= dd.cost; S.unl[i] = true; } if (S.unl[i]) { S.district = i; say('Переехал: ' + dd.name); save(); } }
+  else return;
+  renderShop();
+});
+setInterval(updateShop, 400);
+
+// ---------- сохранение ----------
+function save() {
+  const s = JSON.stringify(S);
+  try { if (tg && tg.CloudStorage) tg.CloudStorage.setItem(SAVE_KEY, s); else localStorage.setItem(SAVE_KEY, s); } catch (e) {}
+}
+function load() {
+  return new Promise(res => {
+    try {
+      if (tg && tg.CloudStorage) tg.CloudStorage.getItem(SAVE_KEY, (err, v) => res(!err && v ? JSON.parse(v) : null));
+      else { const v = localStorage.getItem(SAVE_KEY); res(v ? JSON.parse(v) : null); }
+    } catch (e) { res(null); }
+  });
+}
+setInterval(save, 5000);
+load().then(s => { if (s) { S = Object.assign(S, s, { lv: Object.assign(S.lv, s.lv) }); } renderShop(); requestAnimationFrame(frame); });
 </script>
 </body>
 </html>
