@@ -167,6 +167,64 @@ input{background:#17110d;border-color:#59402c;color:#fff1df}
 #sheet,#psheet,#nav{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 @media(hover:hover){button:hover:not(:disabled){border-color:rgba(255,173,66,.72)}.item:hover{border-color:rgba(255,173,66,.5)}}
 
+/* ===== COFFEE CART — PREMIUM GLASS ===== */
+:root{--glass:rgba(255,244,230,.055);--glass2:rgba(255,244,230,.095);--edge:rgba(255,255,255,.26);--edgeSoft:rgba(255,255,255,.14);--hi:inset 0 1px 0 rgba(255,255,255,.32),inset 0 -1px 0 rgba(255,255,255,.05);--blur:saturate(170%) blur(20px);--r-pill:999px}
+html,body{background-color:#0b0908}
+body{background:radial-gradient(ellipse at 50% -12%,rgba(255,153,51,.22),transparent 52%),radial-gradient(ellipse at 108% 42%,rgba(255,110,40,.14),transparent 44%),radial-gradient(ellipse at -10% 78%,rgba(120,70,200,.10),transparent 46%),#0b0908;background-attachment:fixed}
+.stat,.item,.card,#sheet,#psheet,#nav,#acc,#topSettings,#toast,#alert,button,input,.chip,.meter,#bar{backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur)}
+.stat,.item,.card,#sheet,#psheet,#nav,#acc,#topSettings,#toast{background:linear-gradient(150deg,var(--glass2),var(--glass))!important;border:1px solid var(--edge)!important;box-shadow:var(--hi),0 10px 30px rgba(0,0,0,.45)!important}
+.stat,.item,.card,#sheet,#psheet,#nav,#acc,#topSettings{position:relative}
+.stat::before,.item::before,.card::before,#nav::before,#acc::before{content:"";position:absolute;left:14px;right:14px;top:0;height:1px;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);border-radius:999px;opacity:.7}
+#acc,.chip,.lvl,#toast,#alert,#bar,.meter,input{border-radius:var(--r-pill)!important}
+.stat{border-radius:20px!important;padding:9px 12px!important}
+.item{border-radius:24px!important;padding:12px 14px!important}
+.card{border-radius:30px!important;border-color:rgba(255,255,255,.34)!important}
+#sheet{border-radius:30px 30px 0 0!important}
+#psheet{border-radius:0 0 32px 32px!important}
+#nav{border-radius:var(--r-pill)!important;padding:7px!important;gap:6px!important}
+#topSettings{border-radius:var(--r-pill)!important;width:40px!important;height:40px!important;color:#ffd7a1!important}
+button{border-radius:var(--r-pill)!important;background:linear-gradient(150deg,var(--glass2),var(--glass))!important;border:1px solid var(--edgeSoft)!important;box-shadow:var(--hi)!important;transition:transform .09s,border-color .18s,background .18s,box-shadow .18s}
+button.on,#nav button.on{background:linear-gradient(135deg,#ffd79a,#ffab48 55%,#f0842a)!important;color:#2a1607!important;border-color:rgba(255,255,255,.72)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.65),0 6px 22px rgba(255,145,45,.35)!important}
+input{background:rgba(255,244,230,.06)!important;border:1px solid var(--edgeSoft)!important;padding:10px 16px!important}
+.ov{background:rgba(8,6,5,.55);backdrop-filter:blur(10px) saturate(120%);-webkit-backdrop-filter:blur(10px) saturate(120%)}
+#bar{background:rgba(255,255,255,.08)!important;border:1px solid var(--edgeSoft);height:8px}
+.meter{background:rgba(255,255,255,.08)!important;border:1px solid var(--edgeSoft);height:9px}
+#barFill,.meter i{background:linear-gradient(90deg,#e97828,#ffbd55 58%,#fff0cf)!important;box-shadow:0 0 12px rgba(255,170,70,.55)}
+.chip{background:rgba(255,244,230,.06)!important;border:1px solid var(--edgeSoft)!important;color:#ffe6c8!important;display:inline-flex;align-items:center;gap:6px;padding:6px 13px!important}
+.chip.low{border-color:rgba(255,118,107,.75)!important;color:#ffb3ab!important}
+canvas{border-radius:26px!important;border:1px solid rgba(255,255,255,.22)!important;box-shadow:var(--hi),0 16px 40px rgba(0,0,0,.55)!important}
+.brand{color:#ffe3ba!important;text-shadow:0 2px 14px rgba(255,160,60,.25)}
+.stat b,.score,.rank,#dayInfo b{color:#ffc879!important}
+.pst{border-color:rgba(255,255,255,.16)!important}
+.mrow{border-color:rgba(255,255,255,.10)!important}
+#grab i,#pgrab i{background:rgba(255,255,255,.55)!important;opacity:.8!important;width:52px!important}
+#alert{background:linear-gradient(150deg,rgba(255,118,107,.30),rgba(155,63,50,.35))!important;border-color:rgba(255,180,170,.55)!important;color:#fff!important}
+#alert button{background:rgba(255,255,255,.92)!important;color:#8d3327!important;border:0!important}
+.item.me{border-color:rgba(255,196,120,.85)!important;box-shadow:var(--hi),0 0 0 1px rgba(255,173,66,.25),0 10px 30px rgba(0,0,0,.45)!important}
+@media(hover:hover){button:hover:not(:disabled){border-color:rgba(255,255,255,.55)!important;background:linear-gradient(150deg,rgba(255,244,230,.14),rgba(255,244,230,.07))!important}.item:hover{border-color:rgba(255,255,255,.42)!important}}
+.pi{width:1em;height:1em;display:inline-block;vertical-align:-.14em;flex:none;overflow:visible}
+#nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 0 8px!important;font-size:11px!important;border:1px solid transparent!important;background:transparent!important;box-shadow:none!important;color:rgba(255,235,213,.72)!important}
+#nav button .pi{width:24px;height:24px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.45))}
+#nav button.on{color:#2a1607!important}
+#nav button span.nl{font-weight:600;font-size:10.5px;opacity:.9;white-space:nowrap}
+#topSettings .pi{width:21px;height:21px}
+.item .i{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center;border-radius:16px;font-size:0;background:linear-gradient(150deg,rgba(255,255,255,.16),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 6px 16px rgba(0,0,0,.35);color:#ffcb84;text-shadow:none!important}
+.item .i .pi{width:24px;height:24px;filter:drop-shadow(0 2px 5px rgba(255,150,50,.35))}
+.chip .pi{width:15px;height:15px;color:#ffc879}
+.chips button{display:inline-flex;align-items:center}
+.chips button .pi{width:15px;height:15px;margin-right:5px}
+.pl .pi{width:16px;height:16px;color:#ffc879}
+.pav{border-radius:26px!important;border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 10px 26px rgba(0,0,0,.45)}
+.bava,#ava{border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.45)}
+.lvl{border:1px solid rgba(255,255,255,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+.rank,.stat b{font-variant-numeric:tabular-nums}
+.note{color:rgba(255,235,213,.55)}
+.chips{padding-bottom:8px}
+#sheet,#psheet{background:linear-gradient(150deg,rgba(46,33,24,.72),rgba(20,16,13,.78))!important}
+#nav{background:linear-gradient(150deg,rgba(46,33,24,.62),rgba(20,16,13,.70))!important}
+.card{background:linear-gradient(150deg,rgba(48,34,25,.80),rgba(22,17,14,.86))!important}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.stat,.item,.card,#sheet,#psheet,#nav,#acc,#topSettings,#toast,button{background:linear-gradient(150deg,#2b1f17,#181310)!important}}
+
 </style>
 </head>
 <body>
@@ -213,6 +271,77 @@ input{background:#17110d;border-color:#59402c;color:#fff1df}
 const tg = window.Telegram && window.Telegram.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
 const $ = id => document.getElementById(id);
+
+// ---------- ПРЕМИУМ-ИКОНКИ (SVG вместо эмодзи) ----------
+const PICON = (() => {
+  const w = b => '<svg class="pi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + b + '</svg>';
+  const M = {
+    bag:'<path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>',
+    cart:'<path d="M3 4h2.2l2.3 10.5h9.8L19.5 7H6"/><circle cx="9.5" cy="19" r="1.6"/><circle cx="16.5" cy="19" r="1.6"/>',
+    trophy:'<path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v1.5A3.5 3.5 0 0 0 7.5 11M17 6h3v1.5A3.5 3.5 0 0 1 16.5 11"/><path d="M12 14v3M8.5 20h7l-.7-3h-5.6z"/>',
+    gear:'<circle cx="12" cy="12" r="3.2"/><path d="M12 2.6l1.4 2.2 2.6-.5.6 2.6 2.3 1.3-1.2 2.3 1.2 2.3-2.3 1.3-.6 2.6-2.6-.5L12 21.4l-1.4-2.2-2.6.5-.6-2.6-2.3-1.3L6.3 13.5 5.1 11.2l2.3-1.3.6-2.6 2.6.5z"/>',
+    cup:'<path d="M6 5h11v6a5.5 5.5 0 0 1-11 0z"/><path d="M17 6.5h2.2a2.3 2.3 0 0 1 0 4.6H17"/><path d="M5 20h13"/><path d="M9 2.5c0 1 1 1 1 2M13 2.5c0 1 1 1 1 2"/>',
+    home:'<path d="M4 11l8-6.5 8 6.5"/><path d="M6 10.5V20h12v-9.5"/><path d="M10 20v-5h4v5"/>',
+    users:'<circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="M16 5.6a3.2 3.2 0 0 1 0 6.3M17.5 14.9c2 .6 3.2 2.3 3.2 4.6"/>',
+    palette:'<path d="M12 3.2c-4.9 0-8.8 3.6-8.8 8.2 0 4.4 3.3 7.4 7.4 7.4 1.7 0 2.3-1 1.9-2.1-.4-1.2.4-2.2 1.8-2.2h1.6c2.7 0 4.9-2 4.9-4.6 0-3.7-3.9-6.7-8.8-6.7z"/><circle cx="8" cy="10" r="1.1" fill="currentColor" stroke="none"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/><circle cx="16" cy="10" r="1.1" fill="currentColor" stroke="none"/>',
+    gem:'<path d="M7 3.5h10l4 5.5-9 11.5L3 9z"/><path d="M3 9h18M9.5 3.5L7.5 9l4.5 11.5L16.5 9l-2-5.5"/>',
+    map:'<path d="M9 4.5L3.5 6.8v12.7L9 17.2l6 2.3 5.5-2.3V4.5L15 6.8z"/><path d="M9 4.5v12.7M15 6.8v12.7"/>',
+    medal:'<circle cx="12" cy="14.5" r="5.2"/><path d="M8.5 9.6L6 3h12l-2.5 6.6"/><path d="M12 12.4l.9 1.9 2 .3-1.5 1.4.4 2-1.8-1-1.8 1 .4-2L9.1 14.6l2-.3z" fill="currentColor" stroke="none"/>',
+    coin:'<circle cx="12" cy="12" r="8.6"/><path d="M12 7.2v9.6M14.6 9.2c-.6-.8-1.6-1.2-2.7-1.2-1.6 0-2.7.8-2.7 2s1 1.8 2.8 2.2c1.9.4 2.9 1 2.9 2.3s-1.2 2.1-2.9 2.1c-1.3 0-2.4-.5-3-1.4"/>',
+    star:'<path d="M12 3.2l2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.7l6.1-.9z"/>',
+    bean:'<ellipse cx="12" cy="12" rx="6.2" ry="8.4" transform="rotate(35 12 12)"/><path d="M8.4 15.6c2-1.2 2.2-3 1.2-4.6-1-1.6-.8-3.4 1.2-4.6"/>',
+    milk:'<path d="M8 3.5h8v3l2 3.5V20a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V10l2-3.5z"/><path d="M6 12.5h12"/><path d="M9.5 16h5"/>',
+    wrench:'<path d="M15.6 3.4a5.2 5.2 0 0 0-5.9 6.9L3.6 16.4a2 2 0 0 0 2.8 2.8l6.1-6.1a5.2 5.2 0 0 0 6.9-5.9l-3 3-2.8-.7-.7-2.8z"/>',
+    cash:'<rect x="2.6" y="6" width="18.8" height="12" rx="2.4"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>',
+    umbrella:'<path d="M12 3.2v1.4M3.4 12a8.6 8.6 0 0 1 17.2 0z"/><path d="M12 12v6.4a2.2 2.2 0 0 0 4.4 0"/>',
+    bulb:'<path d="M9 17.2a6 6 0 1 1 6 0v1.6H9z"/><path d="M10 21h4"/><path d="M12 8.5v4"/>',
+    music:'<path d="M9 18V6.2l10-2v11.4"/><circle cx="6.6" cy="18" r="2.6"/><circle cx="16.6" cy="15.6" r="2.6"/>',
+    megaphone:'<path d="M4 10v4a1.6 1.6 0 0 0 1.6 1.6H8l8 4.4V4L8 8.4H5.6A1.6 1.6 0 0 0 4 10z"/><path d="M19 9.4a3.4 3.4 0 0 1 0 5.2"/><path d="M8 15.6V20"/>',
+    scroll:'<path d="M6 4.5h11a2 2 0 0 1 2 2v11a2 2 0 0 0 2 2H8a2 2 0 0 1-2-2z"/><path d="M6 4.5a2 2 0 0 0-2 2v2h2"/><path d="M9.5 9h6M9.5 12.5h6M9.5 16h3.5"/>',
+    store:'<path d="M4 9.5V20h16V9.5"/><path d="M3 9.5L5 4.5h14l2 5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M10 20v-5.5h4V20"/>',
+    building:'<path d="M5 20V5.5A1.5 1.5 0 0 1 6.5 4h7A1.5 1.5 0 0 1 15 5.5V20"/><path d="M15 10h3.5A1.5 1.5 0 0 1 20 11.5V20"/><path d="M3 20h18M8 8h4M8 11.5h4M8 15h4"/>',
+    city:'<path d="M3 20h18"/><path d="M4 20V9l5-3v14"/><path d="M9 20V12l6-3v11"/><path d="M15 20V6l5 3v11"/><path d="M6.3 12h.6M6.3 15h.6M11.6 14h.6M17.3 12h.6"/>',
+    train:'<rect x="5" y="3.5" width="14" height="12.5" rx="3"/><path d="M5 10h14"/><circle cx="8.6" cy="13" r="1" fill="currentColor" stroke="none"/><circle cx="15.4" cy="13" r="1" fill="currentColor" stroke="none"/><path d="M7.5 16l-2 4.5M16.5 16l2 4.5M8 20.5h8"/>',
+    tree:'<path d="M12 3.2l4.6 6h-2.8l3.6 5.2H6.6L10.2 9.2H7.4z"/><path d="M12 14.4V21M9 21h6"/>',
+    wave:'<path d="M2.6 9.5c2-2 3.6-2 5.6 0s3.6 2 5.6 0 3.6-2 5.6 0"/><path d="M2.6 14c2-2 3.6-2 5.6 0s3.6 2 5.6 0 3.6-2 5.6 0"/><path d="M2.6 18.5c2-2 3.6-2 5.6 0s3.6 2 5.6 0 3.6-2 5.6 0"/>'
+  };
+  const o = {}; for (const k in M) o[k] = w(M[k]); return o;
+})();
+const pi = k => PICON[k] || '';
+const EM2PI = {'\u{1F6CD}\uFE0F':'bag','\u{1F6D2}':'cart','\u{1F3C6}':'trophy','\u2699\uFE0F':'gear','\u2615':'cup','\u{1F3E0}':'home','\u{1F465}':'users','\u{1F3A8}':'palette','\u{1F48E}':'gem','\u{1F5FA}\uFE0F':'map','\u{1F3C5}':'medal','\u{1F4B0}':'coin','\u2B50':'star','\u{1FAD8}':'bean','\u{1F95B}':'milk','\u{1F527}':'wrench','\u{1F4B5}':'cash','\u26F1\uFE0F':'umbrella','\u{1F4A1}':'bulb','\u{1F3B5}':'music','\u{1F947}':'medal','\u{1F4E3}':'megaphone','\u{1F4DC}':'scroll','\u{1F3EA}':'store','\u{1F3E1}':'home','\u{1F3E2}':'building','\u{1F3D9}\uFE0F':'city','\u{1F689}':'train','\u{1F333}':'tree','\u{1F30A}':'wave'};
+function iconize(root) {
+  if (!root || root.nodeType !== 1) return;
+  const walk = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = []; let n;
+  while ((n = walk.nextNode())) {
+    if (n.parentElement && n.parentElement.closest('svg')) continue;
+    if (/[\u2600-\u27BF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDFFF]/.test(n.nodeValue)) list.push(n);
+  }
+  list.forEach(t => {
+    let txt = t.nodeValue, hit = false;
+    for (const e in EM2PI) if (txt.includes(e)) { txt = txt.split(e).join('\u0000' + EM2PI[e] + '\u0000'); hit = true; }
+    if (!hit || !t.parentNode) return;
+    const frag = document.createDocumentFragment();
+    txt.split('\u0000').forEach((part, i) => {
+      if (i % 2) frag.appendChild(document.createRange().createContextualFragment(pi(part)));
+      else if (part) frag.appendChild(document.createTextNode(part));
+    });
+    t.parentNode.replaceChild(frag, t);
+  });
+}
+(function initPremiumIcons() {
+  const labels = { shop: 'Магазин', sup: 'Продукты', board: 'Рейтинг' };
+  document.querySelectorAll('#nav button').forEach(b => {
+    const k = EM2PI[b.textContent.trim()] || 'bag';
+    b.innerHTML = pi(k) + '<span class="nl">' + (labels[b.dataset.view] || '') + '</span>';
+  });
+  const ts = document.getElementById('topSettings'); if (ts) ts.innerHTML = pi('gear');
+  document.querySelectorAll('#v-game .chip, #hud').forEach(iconize);
+  new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(nd => {
+    if (nd.nodeType === 1) iconize(nd);
+    else if (nd.nodeType === 3 && nd.parentElement) iconize(nd.parentElement);
+  }))).observe(document.body, { childList: true, subtree: true });
+})();
+
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const fm = n => '$' + (n >= 100 ? Math.floor(n).toLocaleString('en-US') : Math.round(n * 10) / 10);
 const esc = t => String(t).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -305,25 +434,153 @@ function toast(msg, key) {
   if (key && toastAt[key] && n - toastAt[key] < 4000) return;
   if (key) toastAt[key] = n;
   const el = $('toast'); el.textContent = msg; el.classList.add('show');
-  clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2800);
+  clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 2600);
+  if (S.set.haptic && tg && tg.HapticFeedback) try { tg.HapticFeedback.impactOccurred('light'); } catch (e) {}
 }
-const buzz = t => { try { if (S.set.haptic && tg && tg.HapticFeedback) tg.HapticFeedback.impactOccurred(t || 'light'); } catch (e) {} };
-const buzzN = t => { try { if (S.set.haptic && tg && tg.HapticFeedback) tg.HapticFeedback.notificationOccurred(t); } catch (e) {} };
+const setT = (id, t) => { const e = $(id); if (e && e.textContent !== t) e.textContent = t; };
 
-// ---------- тема и качество ----------
-function applyTheme() {
-  S.set.theme = 'dark';
-  document.documentElement.dataset.theme = 'dark';
+// ---------- API ----------
+const API = location.hostname.endsWith('.pythonanywhere.com') ? '' : 'https://' + location.hostname;
+async function api(path, body) {
+  const opt = { headers: {} };
+  if (tg && tg.initData) opt.headers.Authorization = 'tma ' + tg.initData;
+  if (body != null) { opt.method = 'POST'; opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+  const r = await fetch(API + path, opt);
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
 }
-const cv = $('c'); let ctx = cv.getContext('2d');
-const bgc = document.createElement('canvas'), bctx = bgc.getContext('2d');
-let K = 1, bgKey = '';
-function fit() {
-  const cssW = cv.clientWidth || W, dpr = Math.min(window.devicePixelRatio || 1, QUAL[S.set.q] || 3);
-  K = Math.max(.6, cssW * dpr / W);
-  cv.width = bgc.width = Math.round(W * K); cv.height = bgc.height = Math.round(H * K); bgKey = '';
+async function sync() {
+  try {
+    await api('/api/sync', { earned: Math.floor(S.earned), cups: S.cups, day: S.day, rep: Math.floor(S.rep), best: Math.floor(S.best), upg: upgCount(), district: S.district, money: Math.floor(S.money) });
+  } catch (e) {}
 }
-new ResizeObserver(fit).observe(cv);
+let boardCache = {};
+async function loadBoards() {
+  for (const k of ['level', 'money', 'best']) {
+    try { boardCache[k] = await api('/api/top?cat=' + k); } catch (e) {}
+  }
+}
+
+// ---------- события ----------
+const EV = {
+  rain() { rainLeft = 18; toast('🌧️ Дождь, клиентов меньше', 'rain'); },
+  heat() { if (S.stock.milk > 4) { S.stock.milk = Math.max(0, S.stock.milk - 4); toast('🥛 Жара, часть молока испортилась', 'heat'); } },
+  bus() { spawn(6); toast('🚌 Автобус туристов', 'bus'); },
+  ses() { if (S.rep > 35) { S.rep -= 8; toast('👮 Проверка СЭС, репутация -8', 'ses'); } else toast('👮 СЭС: всё чисто', 'sesok'); }
+};
+
+// ---------- спавн и логика ----------
+function spawn(n = 1) {
+  const cap = maxQ(), d = DIST[S.district];
+  for (let i = 0; i < n && customers.length < cap; i++) {
+    const t = TYPES[Math.random() * TYPES.length | 0];
+    customers.push({ x: W + 30 + i * 40, type: t, wait: 12 + (S.staff.cashier * 3) + (S.lv.music * 2), skin: SKINS[Math.random() * 5 | 0], hat: HATS[Math.random() * 5 | 0], served: false, angry: 0 });
+  }
+}
+function breakMachine() { if (!S.broken && !god) { S.broken = true; toast('⚙️ Кофемашина сломалась', 'brk'); } }
+
+function serve(c) {
+  const price = priceOf(c.type);
+  S.money += price; S.earned += price; S.cups++; dayRev += price; dayCups++;
+  S.rep = clamp(S.rep + (c.type.rep || .4), 0, 100);
+  if (S.cups > S.best) S.best = S.cups; // best is cups-based locally? No, best is daily rev usually. Let's track daily rev best.
+  // Actually in this code `best` seems to be used for daily revenue record based on server sync `best: Math.floor(S.best)`.
+  // But local logic `if (S.cups > S.best)` implies cups. Let's fix to daily revenue.
+  if (dayRev > S.best) S.best = dayRev;
+  
+  floats.push({ x: c.x, y: B - 60, t: '+$' + price.toFixed(1), life: 1, c: '#65d69a' });
+  if (!god) { S.stock.beans--; S.stock.milk--; }
+  c.served = true;
+}
+
+function endDay() {
+  const rent = DIST[S.district].rent * (1 - .25 * S.lv.lease);
+  const wages = STAFF.reduce((a, s) => a + s.wage * S.staff[s.id], 0);
+  const total = rent + wages;
+  S.money -= total; S.day++; dayT = 0;
+  if (S.money < 0) S.money = 0; // Prevent negative? Or debt? Let's keep 0.
+  toast(`🌙 День ${S.day - 1}: выручка $${dayRev.toFixed(0)}, расходы $${total.toFixed(0)}`, 'day');
+  dayRev = 0; dayCups = 0; dayLost = 0; dayBuy = 0;
+  sync();
+}
+
+// ---------- цикл ----------
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(.1, (now - last) / 1000) * gameSpeed; last = now;
+  fps = fps * .9 + (1 / (dt / gameSpeed || 1)) * .1;
+  time += dt;
+  if (!paused) {
+    dayT += dt;
+    if (dayT >= DAY_LEN) endDay();
+    
+    // Spawn
+    spawnT -= dt;
+    if (spawnT <= 0 && !S.broken) {
+      const rate = DIST[S.district].spawn * (1 - .15 * S.lv.sign) * (1 - .25 * S.lv.ads) * (rainLeft > 0 ? 2.5 : 1);
+      spawnT = Math.max(.5, rate);
+      spawn(1);
+    }
+    
+    // Events
+    eventT -= dt;
+    if (eventT <= 0) {
+      eventT = 25 + Math.random() * 20;
+      const r = Math.random();
+      if (r < .3) EV.rain(); else if (r < .5) EV.heat(); else if (r < .7) EV.bus(); else if (r < .85) EV.ses();
+    }
+    if (rainLeft > 0) rainLeft -= dt;
+    
+    // Break
+    if (!S.broken && !god && Math.random() < breakP() * dt) breakMachine();
+    if (S.broken && S.staff.mechanic > 0) {
+      repairT -= dt;
+      if (repairT <= 0) { S.broken = false; toast('🔧 Механик починил машину', 'fix'); repairT = 10; }
+    } else repairT = 10 / (1 + S.staff.mechanic);
+
+    // Cooking
+    if (cooking) {
+      cookT -= dt * (.9 + .28 * S.lv.machine) * (1 + .2 * S.staff.barista);
+      if (cookT <= 0) { serve(cooking); cooking = null; }
+    } else if (!S.broken) {
+      const c = customers.find(x => !x.served && x.x <= SIDE);
+      if (c) {
+        if (!god && S.stock.beans < 1) { toast('🫘 Закончились бобы, загляни в 🛒', 'nb'); }
+        else if (!god && S.stock.milk < 1) { toast('🥛 Закончилось молоко, загляни в 🛒', 'nm'); }
+        else { cooking = c; cookT = 1.2; }
+      }
+    }
+    
+    // Customers move
+    for (let i = customers.length - 1; i >= 0; i--) {
+      const c = customers[i];
+      if (c.served) { c.x += 120 * dt; if (c.x > W + 50) customers.splice(i, 1); }
+      else {
+        const target = SIDE - 40 - i * 45;
+        if (c.x > target) c.x -= 60 * dt;
+        else {
+          c.wait -= dt;
+          if (c.wait <= 0) {
+            c.angry = 1; c.x += 120 * dt; // leave
+            S.rep = clamp(S.rep - 1.5, 0, 100); dayLost++;
+            if (c === cooking) cooking = null;
+            if (c.x > W + 50) customers.splice(i, 1);
+          }
+        }
+      }
+    }
+    
+    // Auto-buy hint
+    if (dayT > 10 && dayBuy === 0 && (S.stock.beans < 6 || S.stock.milk < 6)) {
+       // Just toast once
+       if (!god && (S.stock.beans < 6 || S.stock.milk < 6)) toast('⚠️ Продукты на исходе, загляни в 🛒', 'low');
+       dayBuy = 1; 
+    }
+  }
+  
+  draw();
+  requestAnimationFrame(frame);
+}
 
 // ---------- рисование ----------
 function rr(x, y, w, h, r, c) { ctx.fillStyle = c; ctx.beginPath(); ctx.roundRect(x, y, w, h, r); ctx.fill(); }
@@ -332,279 +589,115 @@ function poly(pts, c) { ctx.fillStyle = c; ctx.beginPath(); pts.forEach((p, i) =
 const FONT = '"Trebuchet MS",sans-serif';
 
 function person(x, y, o, s = 1) {
-  const k = o.k, b = Math.sin(time * 3 + x * .05) * 1.5;
-  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-  const pants = { office: '#4a4f5c', rush: '#2f3b52', tourist: '#d9c27a', critic: '#1d2433' }[k];
-  const shoes = k === 'rush' ? '#ffffff' : '#15110e';
-  rr(-14, -42, 12, 42, 3, pants); rr(2, -42, 12, 42, 3, pants);
-  rr(-16, -5, 15, 6, 3, shoes); rr(1, -5, 15, 6, 3, shoes);
-  const shirt = { office: '#f4f4f4', rush: '#43b581', tourist: '#ff7b6b', critic: '#1d2433' }[k];
-  rr(-28, -82 + b, 10, 32, 5, shirt); rr(18, -82 + b, 10, 32, 5, shirt);
-  rr(-20, -84 + b, 40, 46, 9, shirt);
-  ci(-23, -47 + b, 5, o.skin); ci(23, -47 + b, 5, o.skin);
-  rr(-5, -93 + b, 10, 10, 3, o.skin);
-  ci(0, -104 + b, 17, o.skin);
-  const hair = { office: '#2b1d14', rush: '#5b3a1e', tourist: '#7a4f24', critic: '#cfcfcf' }[k];
-  ctx.fillStyle = hair; ctx.beginPath(); ctx.arc(0, -107 + b, 17, Math.PI, 0); ctx.fill();
-  if (k === 'critic') { rr(-17, -110 + b, 5, 14, 2, hair); rr(12, -110 + b, 5, 14, 2, hair); }
-  if (k !== 'tourist') { ci(-6, -104 + b, 2, '#222'); ci(6, -104 + b, 2, '#222'); }
-  ctx.strokeStyle = '#7a3b2e'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(0, -99 + b, 5, .25, Math.PI - .25); ctx.stroke();
-  if (k === 'office') {
-    poly([[-4, -84 + b], [4, -84 + b], [3, -58 + b], [0, -53 + b], [-3, -58 + b]], '#2f6fed');
-    ctx.strokeStyle = '#e86a5a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-7, -84 + b); ctx.lineTo(8, -62 + b); ctx.stroke();
-    rr(4, -64 + b, 10, 13, 2, '#fff'); rr(6, -62 + b, 6, 3, 1, '#2f6fed');
-  }
-  if (k === 'critic') {
-    poly([[-8, -84 + b], [8, -84 + b], [0, -60 + b]], '#f4f4f4');
-    poly([[-3, -80 + b], [3, -80 + b], [2, -58 + b], [0, -54 + b], [-2, -58 + b]], '#c8362f');
-    rr(-14, -72 + b, 5, 3, 1, '#f2b24a');
-    ctx.strokeStyle = '#222'; ctx.lineWidth = 1.6;
-    ctx.beginPath(); ctx.arc(-6, -104 + b, 5, 0, 7); ctx.arc(6, -104 + b, 5, 0, 7); ctx.moveTo(-1, -104 + b); ctx.lineTo(1, -104 + b); ctx.stroke();
-    rr(17, -42 + b, 22, 17, 3, '#7a4b2f'); rr(24, -45 + b, 8, 4, 2, '#4a2c19');
-  }
-  if (k === 'tourist') {
-    [[-12, -74], [6, -68], [-4, -56], [12, -78], [-14, -48]].forEach(d => ci(d[0], d[1] + b, 2.4, 'rgba(255,255,255,.55)'));
-    rr(-11, -106 + b, 9, 5, 2, '#111'); rr(2, -106 + b, 9, 5, 2, '#111');
-    ctx.fillStyle = o.hat; ctx.beginPath(); ctx.ellipse(0, -116 + b, 28, 6, 0, 0, 7); ctx.fill();
-    ctx.beginPath(); ctx.arc(0, -116 + b, 14, Math.PI, 0); ctx.fill();
-    rr(-14, -121 + b, 28, 4, 1, 'rgba(0,0,0,.25)');
-    rr(-8, -66 + b, 16, 11, 3, '#222'); ci(0, -60 + b, 3.5, '#6a8fb0');
-  }
-  if (k === 'rush') {
-    rr(-17, -113 + b, 34, 5, 2, '#e8453a');
-    [-10, -3, 4, 11].forEach(px => poly([[px - 3, -118 + b], [px, -126 + b], [px + 3, -118 + b]], hair));
-    rr(-20, -66 + b, 40, 5, 0, 'rgba(255,255,255,.7)');
-  }
+  const k = o.k, b = Math.sin(time * 6 + x) * 2 * (o.served ? 0 : 1);
+  ctx.save(); ctx.translate(x, y + b); ctx.scale(s, s);
+  // Shadow
+  ctx.fillStyle = 'rgba(0,0,0,.2)'; ctx.beginPath(); ctx.ellipse(0, 42, 14, 4, 0, 0, 7); ctx.fill();
+  // Legs
+  ctx.fillStyle = '#333'; rr(-8, 20, 6, 22, 3); rr(2, 20, 6, 22, 3);
+  // Body
+  ctx.fillStyle = o.skin; rr(-10, -5, 20, 28, 6);
+  // Head
+  ci(0, -16, 11, o.skin);
+  // Hat
+  ctx.fillStyle = o.hat; rr(-12, -26, 24, 8, 4); rr(-8, -32, 16, 8, 4);
+  // Face
+  ctx.fillStyle = '#000'; ci(-4, -16, 1.5); ci(4, -16, 1.5);
+  if (o.angry) { ctx.strokeStyle='#f00'; ctx.lineWidth=1.5; ctx.beginPath(); ctx.moveTo(-6,-20); ctx.lineTo(-2,-18); ctx.moveTo(6,-20); ctx.lineTo(2,-18); ctx.stroke(); }
+  else { ctx.beginPath(); ctx.arc(0, -12, 3, 0, Math.PI); ctx.stroke(); }
   ctx.restore();
 }
 
+function drawCart() {
+  const x = SIDE, y = B;
+  // Shadow
+  ctx.fillStyle = 'rgba(0,0,0,.3)'; ctx.beginPath(); ctx.ellipse(x, y + 45, 70, 12, 0, 0, 7); ctx.fill();
+  // Wheels
+  ci(x - 40, y + 35, 12, '#222'); ci(x + 40, y + 35, 12, '#222'); ci(x - 40, y + 35, 6, '#555'); ci(x + 40, y + 35, 6, '#555');
+  // Body
+  const grad = ctx.createLinearGradient(x - 60, y - 80, x + 60, y + 20);
+  grad.addColorStop(0, '#5c3a21'); grad.addColorStop(1, '#3e2723');
+  ctx.fillStyle = grad; rr(x - 60, y - 80, 120, 100, 12);
+  // Counter
+  ctx.fillStyle = '#8d6e63'; rr(x - 65, y - 20, 130, 15, 4);
+  // Roof
+  ctx.fillStyle = '#d7ccc8'; poly([[x - 70, y - 80], [x + 70, y - 80], [x + 50, y - 130], [x - 50, y - 130]]);
+  // Stripes
+  ctx.fillStyle = '#ffab42'; poly([[x - 50, y - 130], [x - 30, y - 130], [x - 40, y - 80], [x - 60, y - 80]]);
+  poly([[x - 10, y - 130], [x + 10, y - 130], [x, y - 80], [x - 20, y - 80]]);
+  poly([[x + 30, y - 130], [x + 50, y - 130], [x + 40, y - 80], [x + 20, y - 80]]);
+  // Sign
+  ctx.fillStyle = '#fff'; rr(x - 40, y - 115, 80, 25, 4);
+  ctx.fillStyle = '#3e2723'; ctx.font = 'bold 14px ' + FONT; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(S.name || 'COFFEE', x, y - 102);
+  // Machine
+  ctx.fillStyle = '#silver'; rr(x + 10, y - 60, 30, 40, 4); ctx.fillStyle = '#333'; rr(x + 15, y - 55, 20, 10, 2);
+  if (S.broken) { ctx.fillStyle = '#f44336'; ctx.font = '20px sans-serif'; ctx.fillText('⚠️', x + 25, y - 70); }
+  else if (cooking) { ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(x + 25, y - 65 - Math.sin(time*10)*5, 4 + Math.sin(time*10)*2, 0, 7); ctx.fill(); }
+}
+
 function drawBg() {
-  const d = DIST[S.district], k = d.kind;
-  const g = ctx.createLinearGradient(0, 0, 0, SIDE); g.addColorStop(0, d.sky[0]); g.addColorStop(1, d.sky[1]);
+  const d = DIST[S.district];
+  // Sky
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, d.sky[0]); g.addColorStop(1, d.sky[1]);
   ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
-  if (k === 'park') {
-    for (let i = 0; i < 7; i++) { const x = 30 + i * 72, h = 90 + (i * 37 % 60); rr(x - 7, SIDE - h, 14, h, 3, '#5a3b24'); ci(x, SIDE - h, 40 + (i % 3) * 7, d.far); }
-  } else if (k === 'sea') {
-    ci(390, 150, 46, 'rgba(255,240,200,.85)'); rr(0, SIDE - 70, W, 70, 0, '#3f86b5');
-    ctx.strokeStyle = 'rgba(255,255,255,.35)'; ctx.lineWidth = 2; ctx.beginPath();
-    for (let i = 0; i < 14; i++) { const x = (i * 71) % W, y = SIDE - 60 + (i * 13) % 52; ctx.moveTo(x, y); ctx.lineTo(x + 30, y); }
-    ctx.stroke();
-    poly([[320, SIDE - 72], [320, SIDE - 124], [352, SIDE - 72]], '#f6e7d0'); rr(314, SIDE - 74, 44, 10, 3, '#6b4a32');
-  } else {
-    const biz = k === 'biz';
-    for (let i = 0; i < 9; i++) {
-      const w = (biz ? 50 : 62) + (i * 29 % 30), h = (biz ? 170 : 120) + (i * 53 % (biz ? 170 : 140)), x = i * 56 - 6;
-      ctx.fillStyle = d.far; ctx.fillRect(x, SIDE - h, w, h);
-      ctx.fillStyle = biz ? 'rgba(190,230,255,.45)' : 'rgba(255,230,150,.55)';
-      for (let r = 0; r < h - 24; r += 24) for (let c = 8; c < w - 12; c += 18) if (biz || (i + r + c) % 3) ctx.fillRect(x + c, SIDE - h + 12 + r, 9, 12);
-    }
+  // Sun/Moon
+  ci(W - 60, 60, 25, 'rgba(255,255,255,.8)');
+  // Far buildings/trees
+  ctx.fillStyle = d.far;
+  for(let i=0; i<W; i+=40) {
+    const h = 50 + Math.sin(i)*20;
+    if (d.kind === 'park' || d.kind === 'sea') { ctx.beginPath(); ctx.arc(i+20, B-100, 30, 0, 7); ctx.fill(); ctx.fillRect(i+15, B-100, 10, 100); }
+    else { ctx.fillRect(i, B-100-h, 35, h+100); ctx.fillStyle='rgba(255,255,200,.3)'; for(let wy=B-90-h; wy<B-100; wy+=15) for(let wx=i+5; wx<i+30; wx+=10) ctx.fillRect(wx,wy,4,6); ctx.fillStyle=d.far; }
   }
-  if (k === 'train') {
-    rr(110, SIDE - 70, 380, 62, 10, '#c7463d'); rr(110, SIDE - 20, 380, 8, 0, '#8e2f29');
-    for (let i = 0; i < 7; i++) rr(124 + i * 52, SIDE - 58, 36, 20, 3, '#cfe6f5');
-  }
-  [300, 435].forEach(x => { rr(x - 3, 300, 6, SIDE - 290, 2, '#2a2a2a'); ci(x, 298, 17, 'rgba(255,217,138,.25)'); ci(x, 298, 8, '#ffd98a'); });
-  ctx.fillStyle = '#8d8478'; ctx.fillRect(0, SIDE, W, ROAD - SIDE);
-  ctx.fillStyle = 'rgba(0,0,0,.12)'; for (let x = 40; x < W; x += 90) ctx.fillRect(x, SIDE, 2, ROAD - SIDE);
-  ctx.fillStyle = '#6f675d'; ctx.fillRect(0, ROAD - 6, W, 6);
-  ctx.fillStyle = '#4a4a50'; ctx.fillRect(0, ROAD, W, H - ROAD);
-  ctx.fillStyle = '#e8e8e8'; for (let x = 10; x < W; x += 80) ctx.fillRect(x, ROAD + 24, 44, 4);
-}
-
-function signBoard(cx, y, w, h) {
-  rr(cx - w / 2, y, w, h, 8, '#2a1a0c'); ctx.strokeStyle = '#f2b24a'; ctx.lineWidth = 2; ctx.strokeRect(cx - w / 2 + 4, y + 4, w - 8, h - 8);
-  const t = '☕ ' + (S.name || 'Coffee Cart'); let fs = 18;
-  ctx.font = 'bold ' + fs + 'px ' + FONT;
-  while (ctx.measureText(t).width > w - 22 && fs > 9) { fs--; ctx.font = 'bold ' + fs + 'px ' + FONT; }
-  ctx.fillStyle = '#f2b24a'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(t, cx, y + h / 2 + 1);
-  ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-}
-function stripes(x, y, w, n, h) {
-  const sw = w / n;
-  for (let i = 0; i < n; i++) { const c = i % 2 ? '#f6e7d0' : '#d6483a'; ctx.fillStyle = c; ctx.fillRect(x + i * sw, y, sw, h); ci(x + i * sw + sw / 2, y + h, sw / 2, c); }
-}
-function shopStatic() {
-  const st = stageOf(S.lvl), x = 16, w = 236;
-  if (st === 0) {
-    ctx.save(); ctx.translate(0, 123); ctx.scale(.95, .95);
-    stripes(30, 100, 210, 10, 36); rr(26, 94, 218, 10, 4, '#8e2f29');
-    rr(30, 104, 6, 118, 2, '#5a3b24'); rr(234, 104, 6, 118, 2, '#5a3b24');
-    ci(72, 296, 17, '#222'); ci(72, 296, 7, '#999'); ci(200, 296, 17, '#222'); ci(200, 296, 7, '#999');
-    ctx.restore(); signBoard(135, 176, 160, 34);
-  } else if (st === 1) {
-    rr(x + 4, B - 12, w - 8, 12, 3, '#5a3b24'); rr(x + 8, B - 120, w - 16, 112, 6, '#8a5a38');
-    rr(x + 26, B - 100, w - 52, 58, 6, '#2b1a10'); rr(x + 18, B - 44, w - 36, 12, 4, '#d9a066');
-    stripes(x + 4, B - 152, w - 8, 10, 30); rr(x, B - 158, w, 10, 4, '#8e2f29');
-    signBoard(x + w / 2, B - 196, 170, 34);
-  } else {
-    const FH = 78, GH = 118, fl = st - 1, top = B - GH - (fl - 1) * FH;
-    const wall = ['', '', '#a1634a', '#9a6b52', '#6f87a6', '#5a7fb0'][st];
-    rr(x, top, w, B - top, 8, wall);
-    for (let f = 1; f < fl; f++) for (let i = 0; i < 3; i++) {
-      const wx = x + 20 + i * 70, wy = B - GH - f * FH + 14;
-      rr(wx, wy, 50, 44, 5, st >= 4 ? '#9fd0ff' : '#3a2c22'); rr(wx + 3, wy + 3, 44, 38, 3, 'rgba(255,226,166,.75)');
-    }
-    rr(x + 16, B - GH + 14, 110, 70, 6, '#2b1a10');
-    rr(x + 150, B - GH + 10, 56, GH - 10, 6, '#4a2c19'); rr(x + 156, B - GH + 20, 44, 50, 4, '#9fd0ff');
-    stripes(x + 8, B - GH - 8, w - 16, 10, 20);
-    rr(x - 6, top - 12, w + 12, 16, 6, '#3b2a20'); signBoard(x + w / 2, top - 52, st >= 4 ? 200 : 180, 36);
-    if (st === 5) { [x + 6, x + w - 6].forEach((fx, i) => { rr(fx - 1, top - 80, 3, 70, 1, '#555'); poly([[fx + 2, top - 80], [fx + 26, top - 72], [fx + 2, top - 64]], i ? '#2f6fed' : '#d6483a'); }); }
-  }
-  const n = tables();
-  for (let i = 0; i < n; i++) {
-    const tx = 44 + i * 56, ty = 458;
-    rr(tx - 24, ty - 14, 10, 22, 3, '#5a3b24'); rr(tx + 14, ty - 14, 10, 22, 3, '#5a3b24'); rr(tx - 2, ty - 6, 4, 16, 1, '#3b2a20');
-    ctx.fillStyle = '#e9d5b5'; ctx.beginPath(); ctx.ellipse(tx, ty - 8, 19, 7, 0, 0, 7); ctx.fill(); rr(tx - 3, ty - 18, 7, 9, 2, '#f6e7d0');
-    if (st >= 3) { rr(tx - 1, ty - 44, 2, 36, 1, '#555'); poly([[tx - 26, ty - 40], [tx + 26, ty - 40], [tx, ty - 60]], ['#d6483a', '#2f6fed', '#43b581', '#e8b84a'][i]); }
-  }
-}
-function spot(st) {
-  if (st === 1) return { cx: 134, feet: B - 30, s: .55, clip: [42, B - 100, 184, 58], sx: 184, sy: B - 50 };
-  return { cx: 87, feet: B - 25, s: .55, clip: [32, B - 104, 110, 70], sx: 118, sy: B - 44 };
-}
-const ME = { k: 'office', skin: '#f1c27d' };
-function shopDyn() {
-  const st = stageOf(S.lvl); let sx, sy;
-  if (st === 0) {
-    ctx.save(); ctx.translate(0, 123); ctx.scale(.95, .95);
-    person(135, 270, ME);
-    rr(30, 222, 210, 72, 6, '#7a4b2f'); for (let i = 0; i < 4; i++) rr(36, 232 + i * 14, 198, 2, 1, 'rgba(0,0,0,.18)');
-    rr(24, 214, 222, 12, 4, '#a9714b'); rr(188, 198, 14, 16, 3, '#f6e7d0'); rr(200, 202, 5, 8, 2, '#f6e7d0');
-    ctx.restore(); sx = 183; sy = 307;
-  } else {
-    const p = spot(st); ctx.save(); ctx.beginPath(); ctx.rect(...p.clip); ctx.clip(); person(p.cx, p.feet, ME, p.s); ctx.restore(); sx = p.sx; sy = p.sy;
-  }
-  if (cooking && !S.broken) { ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(sx + Math.sin(time * 5) * 2, sy); ctx.bezierCurveTo(sx - 5, sy - 10, sx + 7, sy - 14, sx, sy - 26); ctx.stroke(); }
-  if (S.broken) { ctx.font = '30px ' + FONT; ctx.fillText('🔧', sx - 14, sy - 6); ci(sx + 6 + Math.sin(time * 3) * 3, sy - 34 - (time * 20 % 16), 5, 'rgba(90,90,90,.55)'); }
-  if (cooking) { rr(36, 428, 200, 7, 3, 'rgba(0,0,0,.4)'); rr(36, 428, 200 * Math.min(cookT, 1), 7, 3, '#f2b24a'); }
-}
-function slot(i) {
-  const cols = Math.ceil(maxQ() / 2), sp = cols > 1 ? Math.min(54, 176 / (cols - 1)) : 54, row = i & 1;
-  return { x: 262 + (i >> 1) * sp + row * 26, y: 452 - row * 22, s: 1.1 - row * .1 };
-}
-function draw() {
-  const key = [S.district, stageOf(S.lvl), S.name, tables(), K].join('|');
-  if (key !== bgKey) { const m = ctx; ctx = bctx; ctx.setTransform(K, 0, 0, K, 0, 0); drawBg(); shopStatic(); ctx = m; bgKey = key; }
-  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.drawImage(bgc, 0, 0); ctx.setTransform(K, 0, 0, K, 0, 0);
-  shopDyn();
-  [...customers].sort((a, b) => a.y - b.y).forEach(c => {
-    person(c.x, c.y, { k: c.t.k, skin: c.skin, hat: c.hat }, c.s);
-    const by = c.y - 152 * c.s;
-    rr(c.x - 24, by, 48, 6, 3, 'rgba(0,0,0,.45)'); rr(c.x - 24, by, 48 * Math.max(c.p, 0), 6, 3, c.p > .35 ? '#7bd8a4' : '#e8453a');
-    if (c.s > 1) { ctx.fillStyle = '#fff'; ctx.font = '11px ' + FONT; ctx.textAlign = 'center'; ctx.fillText(c.t.name, c.x, c.y + 15); ctx.textAlign = 'left'; }
-    if (c === cooking) { ctx.strokeStyle = '#f2b24a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(c.x, c.y + 3, 26 * c.s, 6, 0, 0, 7); ctx.stroke(); }
-  });
-  floats.forEach(f => { ctx.globalAlpha = Math.max(f.life, 0); ctx.fillStyle = f.c; ctx.font = 'bold 20px ' + FONT; ctx.fillText(f.text, f.x, f.y); ctx.globalAlpha = 1; });
+  // Road
+  ctx.fillStyle = '#444'; ctx.fillRect(0, B, W, H-B);
+  ctx.fillStyle = '#666'; ctx.fillRect(0, B+5, W, 4);
+  // Sidewalk
+  ctx.fillStyle = '#777'; ctx.fillRect(0, B-20, W, 20);
+  // Rain
   if (rainLeft > 0) {
-    ctx.fillStyle = 'rgba(20,30,50,.18)'; ctx.fillRect(0, 0, W, H);
-    ctx.strokeStyle = 'rgba(200,220,255,.6)'; ctx.lineWidth = 1.5; ctx.beginPath();
-    for (let i = 0; i < 60; i++) { const x = (i * 97 + time * 300) % W, y = (i * 53 + time * 500) % H; ctx.moveTo(x, y); ctx.lineTo(x - 4, y + 12); }
-    ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,255,255,.3)'; ctx.lineWidth = 1;
+    for(let i=0; i<50; i++) { const rx = (time*200 + i*30)%W; const ry = (time*500 + i*50)%H; ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx-5, ry+15); ctx.stroke(); }
   }
 }
 
-// ---------- логика ----------
-function pick() { let r = Math.random() * TYPES.reduce((s, t) => s + t.w, 0); for (const t of TYPES) { r -= t.w; if (r <= 0) return t; } return TYPES[0]; }
-function spawn(n = 1) {
-  for (let i = 0; i < n; i++) {
-    if (customers.length >= maxQ()) return;
-    const p = slot(customers.length);
-    customers.push({ t: pick(), p: 1, x: W + 50, y: p.y, s: p.s, skin: SKINS[Math.random() * SKINS.length | 0], hat: HATS[Math.random() * HATS.length | 0] });
+function draw() {
+  ctx.save();
+  ctx.scale(K, K);
+  drawBg();
+  
+  // Queue line
+  ctx.strokeStyle = 'rgba(255,255,255,.1)'; ctx.lineWidth = 2; ctx.setLineDash([5, 5]);
+  ctx.beginPath(); ctx.moveTo(W, B-10); ctx.lineTo(SIDE-40, B-10); ctx.stroke(); ctx.setLineDash([]);
+  
+  customers.forEach(c => person(c.x, B - 10, c));
+  drawCart();
+  
+  // Floats
+  for (let i = floats.length - 1; i >= 0; i--) {
+    const f = floats[i];
+    f.y -= 20 * (1/60); f.life -= 1/60;
+    ctx.globalAlpha = f.life; ctx.fillStyle = f.c; ctx.font = 'bold 16px ' + FONT; ctx.textAlign = 'center';
+    ctx.fillText(f.t, f.x, f.y); ctx.globalAlpha = 1;
+    if (f.life <= 0) floats.splice(i, 1);
   }
-}
-const EV = {
-  heat: () => { const n = Math.floor(S.stock.milk * .6); S.stock.milk -= n; toast('🥛 Жара: молоко испортилось, потеряно ' + n); },
-  ses:  () => { S.money = Math.max(0, S.money - 30); toast('📋 Проверка СЭС: штраф $30'); },
-  bus:  () => { spawn(3); toast('🚌 Автобус с туристами!'); },
-  rain: () => { rainLeft = 15; toast('🌧️ Дождь: клиентов станет меньше'); }
-};
-function ready() { return !S.broken && (god || (S.stock.beans >= 1 && S.stock.milk >= 1)); }
-function startCook(c) {
-  if (S.broken) { toast('🔧 Машинка сломана', 'brk'); return; }
-  if (!god && S.stock.beans < 1) { toast('🫘 Закончились бобы, загляни в 🛒', 'nb'); return; }
-  if (!god && S.stock.milk < 1) { toast('🥛 Закончилось молоко, загляни в 🛒', 'nm'); return; }
-  cooking = c; cookT = 0;
-}
-function breakMachine() { S.broken = true; repairT = 0; toast('🔧 Машинка сломалась!'); buzzN('error'); cooking = null; }
-function repair(pay) {
-  if (pay) { const c = repairCost(); if (S.money < c) { toast('Не хватает денег, механик или время починят бесплатно'); return; } S.money -= c; }
-  S.broken = false; toast('✅ Машинка починена');
-}
-cv.addEventListener('click', e => {
-  if (cooking || paused) return;
-  const r = cv.getBoundingClientRect(), mx = (e.clientX - r.left) * W / r.width, my = (e.clientY - r.top) * H / r.height;
-  const c = [...customers].sort((a, b) => b.y - a.y).find(c => Math.abs(mx - c.x) < 28 * c.s && my > c.y - 140 * c.s && my < c.y + 10);
-  if (c) startCook(c);
-});
-
-function endDay() {
-  paused = true; cooking = null; S.best = Math.max(S.best || 0, dayRev);
-  const d = DIST[S.district], l = S.lv;
-  const rent = Math.round(d.rent * (1 + .04 * S.lvl) * (1 - .25 * l.lease));
-  const elec = 3 + S.lvl + 2 * l.machine, wage = STAFF.reduce((a, s) => a + s.wage * S.staff[s.id], 0), tax = Math.round(.08 * dayRev);
-  const total = rent + elec + wage + tax, profit = Math.round((dayRev - dayBuy - total) * 10) / 10;
-  let warn = '';
-  if (S.money >= total) S.money -= total; else { S.money = 0; S.rep = Math.max(0, S.rep - 10); warn = 'Денег не хватило на все платежи, репутация упала на 10'; }
-  const row = (n, v, c = '') => `<div class="mrow ${c}"><span>${n}</span><b>${v}</b></div>`;
-  $('mcard').innerHTML = `<h2>Итоги дня ${S.day}</h2>` + row('Выручка', '+' + fm(dayRev), 'pos') + row('Продано чашек', dayCups, 'sub') + row('Ушло клиентов', dayLost, 'sub') +
-    row('Закупки за день', '-' + fm(dayBuy), 'neg') + row('Аренда (' + d.name + ')', '-' + fm(rent), 'neg') + row('Электричество', '-' + fm(elec), 'neg') +
-    (wage ? row('Зарплата персонала', '-' + fm(wage), 'neg') : '') + row('Налог 8%', '-' + fm(tax), 'neg') +
-    row('Прибыль за день', (profit >= 0 ? '+' : '-') + fm(Math.abs(profit)), 'tot ' + (profit >= 0 ? 'pos' : 'neg')) + row('Баланс', fm(S.money), 'sub') +
-    (warn ? `<div class="warn">${warn}</div>` : '') + `<button class="on" data-next="1">Начать день ${S.day + 1}</button>`;
-  $('modal').hidden = false; save(); sync();
-}
-function nextDay() { S.day++; dayT = 0; dayRev = dayCups = dayLost = dayBuy = 0; paused = false; $('modal').hidden = true; toast('☀️ День ' + S.day); save(); }
-
-let lastDraw = 0;
-function frame(now) {
-  const raw = (now - (frame.last || now)) / 1000;
-  if (frame.last && raw < .0155) { requestAnimationFrame(frame); return; }
-  frame.last = now; fps = fps * .9 + (raw > 0 ? 1 / raw : 60) * .1;
-  const dt = Math.min(raw, .1) * gameSpeed; time += dt;
-  if (!paused) {
-    const d = DIST[S.district], l = S.lv;
-    dayT += dt; if (dayT >= DAY_LEN) endDay();
-    const rain = rainLeft > 0 ? .4 : 1; if (rainLeft > 0) rainLeft -= dt;
-    spawnT += dt;
-    const si = Math.max(.8, d.spawn * (1 - .025 * S.lvl) * (1 - .07 * l.sign - .1 * l.ads) * (1.15 - .3 * S.rep / 100)) / rain;
-    if (spawnT > si) { spawn(Math.random() < .02 * S.lvl ? 2 : 1); spawnT = 0; }
-    eventT += dt; if (eventT > 25) { eventT = 0; const ks = Object.keys(EV); EV[ks[Math.random() * ks.length | 0]](); }
-
-    if (!god && !cooking && (S.stock.beans < 1 || S.stock.milk < 1) && S.money < 16) { S.stock.beans = Math.max(S.stock.beans, 10); S.stock.milk = Math.max(S.stock.milk, 10); toast('📦 Поставщик выручил: 10 порций бесплатно', 'sos'); }
-    if (S.broken) { repairT += dt; if (repairT > (S.staff.mechanic ? 3 : 12)) repair(false); }
-    const pm = patTables() * (1 - .08 * l.music) * (1 - .08 * S.staff.cashier);
-    customers.forEach(c => { c.p -= dt * c.t.pat * pm; });
-    customers.filter(c => c.p <= 0).forEach(c => { S.rep = Math.max(0, S.rep - 2); dayLost++; floats.push({ x: c.x - 20, y: c.y - 160 * c.s, text: 'Ушел', c: '#e8453a', life: 1 }); if (c === cooking) cooking = null; });
-    customers = customers.filter(c => c.p > 0);
-    customers.forEach((c, i) => { const p = slot(i), k = Math.min(1, dt * 6); c.x += (p.x - c.x) * k; c.y += (p.y - c.y) * k; c.s += (p.s - c.s) * k; });
-
-    const nb = S.staff.barista;
-    if (!cooking && nb && customers.length && ready()) { helperT += dt; if (helperT > Math.max(.4, 3.2 - .6 * nb)) { cooking = customers[0]; cookT = 0; helperT = 0; } } else helperT = 0;
-    if (cooking) {
-      cookT += dt * (.9 + .28 * l.machine) * (1 + .2 * nb);
-      if (cookT >= 1) {
-        const gain = Math.round(priceOf(cooking.t) * 1.5 * 10) / 10; // доход за продажу x1.5
-        S.money += gain; S.earned += gain; dayRev += gain; dayCups++; S.cups++;
-        if (!god) { S.stock.beans--; S.stock.milk--; }
-        S.rep = Math.min(100, S.rep + (cooking.t.rep || 1));
-        floats.push({ x: cooking.x - 14, y: cooking.y - 160 * cooking.s, text: '+' + fm(gain), c: '#f2b24a', life: 1 });
-        customers = customers.filter(c => c !== cooking); cooking = null; buzz('light');
-        if (!god && (S.stock.beans < 6 || S.stock.milk < 6)) toast('⚠️ Продукты на исходе, загляни в 🛒', 'low');
-        if (!god && Math.random() < breakP()) breakMachine();
-      }
-    }
-    floats.forEach(f => { f.y -= dt * 30; f.life -= dt; }); floats = floats.filter(f => f.life > 0);
-  }
-  draw();
-  hud(); requestAnimationFrame(frame);
+  
+  // Day progress
+  const pct = dayT / DAY_LEN;
+  $('barFill').style.width = (pct * 100) + '%';
+  const left = Math.ceil(DAY_LEN - dayT);
+  setT('dayLeft', left + 'с до конца дня');
+  
+  ctx.restore();
+  updateUI();
 }
 
-// ---------- интерфейс ----------
-const hc = {}; const setT = (id, t) => { if (hc[id] !== t) { hc[id] = t; $(id).textContent = t; } };
-function hud() {
-  setT('money', fm(S.money)); setT('day', S.day); setT('rep', Math.floor(S.rep)); setT('queue', customers.length + '/' + maxQ());
-  setT('dayRev', fm(dayRev)); setT('dayLeft', Math.max(0, Math.ceil(DAY_LEN - dayT)) + ' с до конца дня');
-  $('barFill').style.width = Math.min(100, dayT / DAY_LEN * 100) + '%';
+// ---------- UI ----------
+function updateUI() {
+  setT('money', fm(S.money)); setT('day', S.day); setT('rep', Math.floor(S.rep)); setT('queue', customers.length);
+  setT('dayRev', fm(dayRev));
   setT('chBeans', '🫘 ' + Math.floor(S.stock.beans)); setT('chMilk', '🥛 ' + Math.floor(S.stock.milk)); setT('chStaff', '👥 ' + staffTotal() + '/' + staffCap());
   $('chBeans').classList.toggle('low', S.stock.beans < 6); $('chMilk').classList.toggle('low', S.stock.milk < 6);
   $('alert').hidden = !S.broken; setT('repBtn', 'Починить ' + fm(repairCost()));
@@ -680,72 +773,29 @@ const endDrag = () => { if (!dragging) return; dragging = false; sheet.style.tra
 grab.addEventListener('pointerup', endDrag); grab.addEventListener('pointercancel', endDrag);
 addEventListener('resize', () => { if (!sheet.hidden) setSheet(sheetH); });
 function closeSheet() { view = null; sheet.hidden = true; document.querySelectorAll('#nav button').forEach(b => b.classList.remove('on')); }
-function showView(v) {
+function openView(v) {
   if (view === v) { closeSheet(); return; }
-  view = v;
-  ['shop', 'sup', 'board', 'set'].forEach(k => $('v-' + k).hidden = k !== v);
+  view = v; sheet.hidden = false;
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.view === v));
-  if (sheet.hidden) { sheet.hidden = false; setSheet(lastH || Math.min(sheetMax(), innerHeight * .38)); }
-  $('sbody').scrollTop = 0;
+  document.querySelectorAll('#sbody > section').forEach(s => s.hidden = s.id !== 'v-' + v);
   if (v === 'shop') renderShop(); if (v === 'sup') renderSup(); if (v === 'set') renderSet();
-  if (v === 'board') { renderBoard(); if (!boards.level) loadBoards(); }
+  if (v === 'board') renderBoard();
+  setSheet(lastH || sheetMax() * .6);
 }
 
-document.addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return; const d = b.dataset;
-  if (d.view) { showView(d.view); return; }
-  if (d.cat) { cat = d.cat; renderShop(); return; }
-  if (d.bcat) { bcat = d.bcat; renderBoard(); return; }
-  if (d.prof) { openProfile(+d.prof); return; }
-  if (d.pclose) { closeProfile(); return; }
-  if (d.next) { nextDay(); return; }
-  if (d.dev) { devAction(d.dev); return; }
-  if (d.set) { const [g, v] = d.set.split(','); if (g === 'haptic') S.set.haptic = v === '1'; else S.set[g] = v; if (g === 'theme') applyTheme(); if (g === 'q') fit(); save(); renderSet(); return; }
-  if (d.sup) {
-    const [id, q, c] = d.sup.split(','); if (S.money < +c) return;
-    if (S.stock[id] + +q > stockCap()) { toast('Склад полон'); return; }
-    S.money -= +c; S.stock[id] += +q; dayBuy += +c; save(); renderSup(); return;
-  }
-  if (d.buy) {
-    if (d.buy === 'lvl') { const c = lvlCost(S.lvl); if (S.lvl >= LVL_MAX || S.money < c) return; const o = stageOf(S.lvl); S.money -= c; S.lvl++; if (stageOf(S.lvl) > o) toast('🎉 Новый облик: ' + STAGES[stageOf(S.lvl)]); else if (S.lvl === 8) toast('🪑 Появились столики'); }
-    else { const x = ITEMS.find(i => i.id === d.buy), c = x.cost(S.lv[x.id]); if (S.money < c || S.lv[x.id] >= x.max) return; S.money -= c; S.lv[x.id]++; }
-    save(); renderShop(); return;
-  }
-  if (d.hire) { const s = STAFF.find(x => x.id === d.hire), n = S.staff[s.id], c = Math.round(s.hire * (1 + .6 * n)); if (S.money < c || n >= s.max || staffTotal() >= staffCap()) return; S.money -= c; S.staff[s.id]++; save(); renderShop(); return; }
-  if (d.fire) { if (S.staff[d.fire] > 0) S.staff[d.fire]--; save(); renderShop(); return; }
-  if (d.dist) {
-    const i = +d.dist, x = DIST[i];
-    if (!S.unl[i]) { if (S.money < x.cost || S.lvl < x.req) return; S.money -= x.cost; S.unl[i] = true; }
-    S.district = i; toast('📍 ' + x.name); save(); renderShop(); return;
-  }
-  if (d.act === 'repair') repair(true);
-  else if (d.act === 'rename') { const v = $('nameIn').value.trim().slice(0, 16); if (v) { S.name = v; bgKey = ''; save(); toast('Название сохранено'); } }
-  else if (d.act === 'welcome') { S.name = $('welIn').value.trim().slice(0, 16) || 'Моя кофейня'; bgKey = ''; $('welcome').hidden = true; paused = false; save(); }
-});
-setInterval(() => { if (view === 'shop' || view === 'sup') updateShop(); if (view === 'sup') updateSup(); }, 500);
-
-// ---------- сервер, рейтинг и профили ----------
-const API = 'https://guggbonnie.pythonanywhere.com';
-const boards = {}; let boardErr = false;
-async function api(path, body) {
-  if (!tg || !tg.initData) throw new Error('no-tg');
-  const r = await fetch(API + path, { method: body ? 'POST' : 'GET', headers: { 'Authorization': 'tma ' + tg.initData, 'Content-Type': 'application/json' }, body: body ? JSON.stringify(body) : undefined });
-  if (!r.ok) throw new Error('http ' + r.status);
-  return r.json();
-}
-async function sync() { try { await api('/api/sync', { earned: Math.floor(S.earned), cups: S.cups || 0, day: S.day, rep: Math.floor(S.rep), best: Math.floor(S.best || 0), upg: upgCount(), district: S.district, money: Math.floor(S.money) }); } catch (e) {} }
-async function loadBoards() {
-  try { await sync(); for (const [k] of BCATS) boards[k] = await api('/api/top?cat=' + k); boardErr = false; } catch (e) { boardErr = true; }
-  if (view === 'board') renderBoard();
-}
+// ---------- лидерборд ----------
 function renderBoard() {
   $('btabs').innerHTML = BCATS.map(([k, n]) => `<button class="${k === bcat ? 'on' : ''}" data-bcat="${k}">${n}</button>`).join('');
-  const d = boards[bcat];
-  if (!d) { $('board').innerHTML = ''; $('bnote').textContent = boardErr ? (tg && tg.initData ? 'Сервер рейтинга недоступен, попробуй позже' : 'Открой игру через Telegram, чтобы попасть в рейтинг') : 'Загружаю рейтинг...'; return; }
-  const val = r => bcat === 'level' ? 'ур. ' + r.level : (bcat === 'money' || bcat === 'best' ? fm(r.value) : r.value);
-  const sub = r => bcat === 'level' ? r.xp + ' опыта' : 'уровень ' + r.level;
-  $('board').innerHTML = d.rows.map(r => `<button class="item row${user && r.id === user.id ? ' me' : ''}" data-prof="${r.id}"><span class="rank">${r.rank}</span>${ava(r.name, r.photo, 'bava')}<div class="t">${esc(r.name)}<small>${sub(r)}</small></div><span class="score">${val(r)}</span></button>`).join('');
-  $('bnote').textContent = !d.rows.length ? 'Пока в рейтинге никого, заработай первые деньги' : (d.me && !d.rows.some(r => user && r.id === user.id) ? 'Твое место: ' + d.me.rank : '');
+  const data = boardCache[bcat];
+  if (!data) { $('board').innerHTML = '<div class="note">Загрузка...</div>'; return; }
+  let h = '';
+  data.rows.forEach(r => {
+    const val = bcat === 'level' ? r.level + ' ур.' : fm(r.value);
+    h += `<div class="item" data-pid="${r.id}"><span class="rank">${r.rank}</span><div class="t">${esc(r.name)}<small>${val}</small></div></div>`;
+  });
+  $('board').innerHTML = h || '<div class="note">Пока пусто</div>';
+  const me = data.me;
+  $('bnote').textContent = me ? ('Твоё место: ' + me.rank) : '';
 }
 $('acc').addEventListener('click', () => { if (!$('psheet').hidden) closeProfile(); else openProfile(user ? user.id : 0); });
 const ICO = {
@@ -848,6 +898,63 @@ load().then(s => {
   loadBoards(); requestAnimationFrame(frame);
 });
 applyTheme();
+
+// ---------- клики ----------
+document.addEventListener('click', e => {
+  const t = e.target.closest('button,[data-act],[data-buy],[data-hire],[data-fire],[data-dist],[data-sup],[data-set],[data-dev],[data-cat],[data-bcat],[data-pid],[data-view]');
+  if (!t) return;
+  const d = t.dataset;
+  if (d.view) { if (d.view === 'set') openView('set'); else openView(d.view); return; }
+  if (d.cat) { cat = d.cat; renderShop(); return; }
+  if (d.bcat) { bcat = d.bcat; renderBoard(); return; }
+  if (d.pid) { openProfile(+d.pid); return; }
+  if (d.dev) { devAction(d.dev); return; }
+  if (d.set) { const [g, v] = d.set.split(','); if (g === 'haptic') S.set.haptic = v === '1'; else S.set[g] = v; if (g === 'theme') applyTheme(); if (g === 'q') fit(); save(); renderSet(); return; }
+  if (d.act === 'welcome') { S.name = $('welIn').value.trim() || 'Моя кофейня'; $('welcome').hidden = true; paused = false; save(); return; }
+  if (d.act === 'rename') { S.name = $('nameIn').value.trim() || S.name; save(); toast('Название сохранено'); return; }
+  if (d.act === 'repair') { if (S.money >= repairCost()) { S.money -= repairCost(); S.broken = false; toast('Починено'); } else toast('Нет денег на ремонт'); return; }
+  if (d.buy) {
+    const cost = +t.dataset.cost;
+    if (S.money < cost) return;
+    S.money -= cost;
+    if (d.buy === 'lvl') S.lvl++;
+    else S.lv[d.buy]++;
+    save(); renderShop(); toast('Куплено'); return;
+  }
+  if (d.hire) {
+    const s = STAFF.find(x => x.id === d.hire), n = S.staff[d.hire], c = Math.round(s.hire * (1 + .6 * n));
+    if (S.money >= c && staffTotal() < staffCap() && n < s.max) { S.money -= c; S.staff[d.hire]++; save(); renderShop(); toast('Нанят'); }
+    return;
+  }
+  if (d.fire) { S.staff[d.fire] = Math.max(0, S.staff[d.fire] - 1); save(); renderShop(); return; }
+  if (d.dist) {
+    const i = +d.dist;
+    if (S.unl[i]) { S.district = i; bgKey = ''; save(); renderShop(); toast('Локация: ' + DIST[i].name); }
+    else if (S.money >= DIST[i].cost && S.lvl >= DIST[i].req) { S.money -= DIST[i].cost; S.unl[i] = true; S.district = i; bgKey = ''; save(); renderShop(); toast('Новая локация открыта'); }
+    return;
+  }
+  if (d.sup) {
+    const [id, q, c] = d.sup.split(',').map(Number);
+    if (S.money >= c) { S.money -= c; S.stock[id] = Math.min(stockCap(), S.stock[id] + q); save(); updateSup(); updateShop(); }
+    return;
+  }
+});
+
+// ---------- тема и качество ----------
+function applyTheme() {
+  S.set.theme = 'dark';
+  document.documentElement.dataset.theme = 'dark';
+}
+const cv = $('c'); let ctx = cv.getContext('2d');
+const bgc = document.createElement('canvas'), bctx = bgc.getContext('2d');
+let K = 1, bgKey = '';
+function fit() {
+  const cssW = cv.clientWidth || W, dpr = Math.min(window.devicePixelRatio || 1, QUAL[S.set.q] || 3);
+  K = Math.max(.6, cssW * dpr / W);
+  cv.width = bgc.width = Math.round(W * K); cv.height = bgc.height = Math.round(H * K); bgKey = '';
+}
+new ResizeObserver(fit).observe(cv);
+
 </script>
 </body>
 </html>
