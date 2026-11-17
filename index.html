@@ -6,13 +6,14 @@
 <title>Coffee Cart</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-:root{--bg:#17110d;--card:#241a14;--card2:#2e2119;--line:#3d2c20;--text:#f6e7d0;--mute:rgba(246,231,208,.62);--acc:#f2b24a;--on:#2a1a0c;--good:#7bd8a4;--bad:#e8503f;--shadow:0 6px 20px rgba(0,0,0,.4)}
-[data-theme=light]{--bg:#f7f0e6;--card:#ffffff;--card2:#fbf5ec;--line:#e8d9c4;--text:#2a1a0c;--mute:rgba(42,26,12,.62);--acc:#e0922a;--on:#ffffff;--good:#1f9d63;--bad:#d8402f;--shadow:0 6px 18px rgba(80,50,20,.14)}
+:root{--bg:#0d0e10;--card:#17191c;--card2:#202226;--line:#34312b;--text:#eee9df;--mute:rgba(238,233,223,.58);--acc:#c7a66a;--on:#17130d;--good:#a8b99a;--bad:#c87969;--shadow:0 8px 26px rgba(0,0,0,.42)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif;transition:background .25s,color .25s}
 [hidden]{display:none!important}
 #app{max-width:560px;margin:0 auto;padding:calc(8px + env(safe-area-inset-top)) 12px calc(98px + env(safe-area-inset-bottom))}
 header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;gap:8px}
+.head-actions{display:flex;align-items:center;gap:7px;min-width:0}
+#topSettings{width:38px;height:38px;padding:0;display:flex;align-items:center;justify-content:center;font-size:19px;border-radius:13px;flex:none}
 .brand{font-size:19px;font-weight:700;color:var(--acc);user-select:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #acc{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 4px 4px 12px;font-size:13px;max-width:52%;cursor:pointer;box-shadow:var(--shadow)}
 #accName{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -52,7 +53,7 @@ button:focus-visible,input:focus-visible{outline:2px solid var(--acc);outline-of
 .packs small{color:inherit;opacity:.75}
 .inrow{display:flex;gap:6px}
 input{flex:1;min-width:0;font:inherit;background:var(--card2);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:9px 11px}
-#nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));width:min(540px,calc(100% - 20px));display:flex;gap:4px;padding:6px;background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);z-index:5}
+#nav{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(10px + env(safe-area-inset-bottom));width:min(420px,calc(100% - 20px));display:flex;gap:4px;padding:6px;background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);z-index:5}
 #nav button{flex:1;font-size:25px;line-height:1;padding:11px 0;border:0;background:transparent;border-radius:18px}
 #nav button.on{background:var(--acc)}
 #sheet{position:fixed;left:50%;transform:translateX(-50%);width:min(560px,calc(100% - 12px));background:var(--card);border:1px solid var(--line);border-bottom:0;border-radius:24px 24px 0 0;box-shadow:0 -8px 30px rgba(0,0,0,.35);z-index:4;display:flex;flex-direction:column;overflow:hidden;transition:height .22s ease}
@@ -96,6 +97,76 @@ input{flex:1;min-width:0;font:inherit;background:var(--card2);color:var(--text);
 .dg{margin-top:10px;font-size:12px;color:var(--mute)}
 .drow{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}
 .drow button{flex:1;white-space:normal;padding:8px 6px;font-size:13px}
+
+/* PREMIUM MONOCHROME — graphite surfaces, champagne accents, unified object treatment */
+body{background:radial-gradient(ellipse at 50% -18%,rgba(199,166,106,.10),transparent 46%),var(--bg)}
+#app{max-width:580px}
+.brand{color:var(--text);letter-spacing:.035em}
+.brand:first-letter{color:var(--acc)}
+#acc{background:linear-gradient(145deg,#1c1e21,#121416);border-color:#484033}
+#topSettings{background:linear-gradient(145deg,#222428,#151619);border-color:#484033;color:var(--acc);box-shadow:inset 0 1px rgba(255,255,255,.05),var(--shadow)}
+.stat,.item,.card,#sheet,#psheet,#nav{background:linear-gradient(150deg,rgba(31,33,36,.98),rgba(19,20,22,.98));border-color:rgba(199,166,106,.22);box-shadow:inset 0 1px rgba(255,255,255,.035),var(--shadow)}
+.stat{border-radius:15px}
+.stat b,.score,.rank{color:var(--acc)}
+#dayInfo b{color:var(--acc)}
+#bar{background:#292a2b}
+#barFill,.meter i{background:linear-gradient(90deg,#8d7041,#d5b77e)}
+.chip{background:#191b1e;border-color:#39362f;color:#d9d2c5}
+canvas{border-color:rgba(199,166,106,.30);box-shadow:0 12px 34px rgba(0,0,0,.48)}
+
+.item .i{font-size:29px;text-shadow:0 3px 10px rgba(199,166,106,.12)}
+.item.me{border-color:var(--acc);box-shadow:0 0 0 1px rgba(199,166,106,.10),var(--shadow)}
+button{background:linear-gradient(145deg,#202226,#17191c);border-color:#3a3832}
+button.on{background:linear-gradient(135deg,#d4b77e,#a98a54);color:#17130d;border-color:#d4b77e;box-shadow:0 4px 16px rgba(199,166,106,.18)}
+#nav{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+#nav button.on{background:linear-gradient(135deg,#d4b77e,#a98a54);color:#17130d}
+#sheet{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.card{border-color:rgba(199,166,106,.48)}
+.card h2{color:var(--acc)}
+.pav{background:linear-gradient(135deg,#b99a62,#6e5837)}
+.pst{border-color:rgba(199,166,106,.22)}
+.lvl{background:linear-gradient(135deg,#d4b77e,#a98a54);color:#17130d}
+input{background:#111315;border-color:#39362f}
+#toast{background:#191b1e;border-color:var(--acc)}
+#alert{background:#70443d}
+
+@media(hover:hover){button:hover:not(:disabled){border-color:rgba(199,166,106,.55)}.item:hover{border-color:rgba(199,166,106,.42)}}
+
+
+/* COFFEE CART — COLORFUL PREMIUM DARK (v13)
+   Dark-only interface; restore natural saturated game and item colors. */
+:root{
+  color-scheme:dark;
+  --bg:#100d0b;--card:#1c1713;--card2:#292019;--line:#49372a;
+  --text:#fff1df;--mute:rgba(255,235,213,.62);
+  --acc:#ffad42;--on:#211308;--good:#65d69a;--bad:#ff766b;
+  --shadow:0 9px 28px rgba(0,0,0,.48)
+}
+html,body{background-color:#100d0b;color:var(--text)}
+body{background:radial-gradient(ellipse at 50% -18%,rgba(255,153,51,.16),transparent 48%),radial-gradient(ellipse at 100% 45%,rgba(96,49,22,.13),transparent 42%),#100d0b}
+.stat,.item,.card,#sheet,#psheet,#nav{
+  background:linear-gradient(150deg,rgba(43,31,23,.98),rgba(24,19,16,.98));
+  border-color:rgba(255,173,66,.25)
+}
+.brand{color:#ffd59c}
+#acc{background:linear-gradient(145deg,#302116,#19130f);border-color:#79502e}
+#topSettings{background:linear-gradient(145deg,#382719,#21170f);border-color:#79502e;color:#ffc16b}
+.stat b,.score,.rank,#dayInfo b{color:#ffbd68}
+#barFill,.meter i{background:linear-gradient(90deg,#e97828,#ffbd55 58%,#ffe09a)}
+.chip{background:#241a14;border-color:#58402d;color:#f3d8b8}
+/* The game canvas is intentionally not desaturated: preserve all scene colors. */
+canvas{border-color:rgba(255,173,66,.34);box-shadow:0 12px 34px rgba(0,0,0,.5)}
+.item .i{font-size:29px;text-shadow:0 3px 12px rgba(255,151,54,.22)}
+button{background:linear-gradient(145deg,#302219,#1d1712);border-color:#59402c}
+button.on,#nav button.on{background:linear-gradient(135deg,#ffc36e,#f18a2d);color:#281606;border-color:#ffc36e;box-shadow:0 4px 18px rgba(255,145,45,.24)}
+.pav{background:linear-gradient(135deg,#ffbd62,#df7130)}
+.lvl{background:linear-gradient(135deg,#ffc36e,#f18a2d);color:#281606}
+input{background:#17110d;border-color:#59402c;color:#fff1df}
+#toast{background:#241a14;border-color:#ffad42}
+#alert{background:#9b3f32}
+#sheet,#psheet,#nav{backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+@media(hover:hover){button:hover:not(:disabled){border-color:rgba(255,173,66,.72)}.item:hover{border-color:rgba(255,173,66,.5)}}
+
 </style>
 </head>
 <body>
@@ -104,7 +175,10 @@ input{flex:1;min-width:0;font:inherit;background:var(--card2);color:var(--text);
 <div id="app">
   <header>
     <div class="brand" id="brand">☕ Coffee Cart</div>
-    <div id="acc"><span id="accName">Гость</span><span id="ava">?</span></div>
+    <div class="head-actions">
+      <button id="topSettings" data-view="set" aria-label="Настройки" title="Настройки">⚙️</button>
+      <div id="acc"><span id="accName">Гость</span><span id="ava">?</span></div>
+    </div>
   </header>
   <div id="hud">
     <div class="stat">Деньги<b id="money">$0</b></div>
@@ -129,7 +203,6 @@ input{flex:1;min-width:0;font:inherit;background:var(--card2);color:var(--text);
   <button data-view="shop" aria-label="Магазин">🛍️</button>
   <button data-view="sup" aria-label="Продукты">🛒</button>
   <button data-view="board" aria-label="Лидерборд">🏆</button>
-  <button data-view="set" aria-label="Настройки">⚙️</button>
 </nav>
 <div id="modal" class="ov" hidden><div id="mcard" class="card"></div></div>
 <div id="dev" class="ov" hidden><div id="dcard" class="card"></div></div>
@@ -217,7 +290,7 @@ const fresh = () => ({
   name: '', money: 80, earned: 0, cups: 0, best: 0, rep: 50, day: 1, district: 0, unl: [true, false, false, false, false], lvl: 0,
   lv: { machine: 0, awning: 0, sign: 0, music: 0, gold: 0, ads: 0, lease: 0 },
   staff: { barista: 0, cashier: 0, mechanic: 0 }, stock: { beans: 40, milk: 40 }, broken: false,
-  set: { theme: 'auto', q: 'high', haptic: true }
+  set: { theme: 'dark', q: 'high', haptic: true }
 });
 const SAVE_KEY = 'coffee-cart-v8';
 let S = fresh();
@@ -239,9 +312,8 @@ const buzzN = t => { try { if (S.set.haptic && tg && tg.HapticFeedback) tg.Hapti
 
 // ---------- тема и качество ----------
 function applyTheme() {
-  let t = S.set.theme;
-  if (t === 'auto') t = (tg && tg.colorScheme) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-  document.documentElement.dataset.theme = t;
+  S.set.theme = 'dark';
+  document.documentElement.dataset.theme = 'dark';
 }
 const cv = $('c'); let ctx = cv.getContext('2d');
 const bgc = document.createElement('canvas'), bctx = bgc.getContext('2d');
@@ -511,7 +583,7 @@ function frame(now) {
     if (cooking) {
       cookT += dt * (.9 + .28 * l.machine) * (1 + .2 * nb);
       if (cookT >= 1) {
-        const gain = priceOf(cooking.t);
+        const gain = Math.round(priceOf(cooking.t) * 1.5 * 10) / 10; // доход за продажу x1.5
         S.money += gain; S.earned += gain; dayRev += gain; dayCups++; S.cups++;
         if (!god) { S.stock.beans--; S.stock.milk--; }
         S.rep = Math.min(100, S.rep + (cooking.t.rep || 1));
@@ -592,7 +664,6 @@ function renderSet() {
   const ch = (g, k, n, cur) => `<button class="${String(cur) === k ? 'on' : ''}" data-set="${g},${k}">${n}</button>`;
   $('setl').innerHTML =
     `<div class="item col"><div class="t">Название заведения</div><div class="inrow"><input id="nameIn" maxlength="16" value="${esc(S.name)}"><button class="on" data-act="rename">Сохранить</button></div></div>` +
-    `<div class="item col"><div class="t">Тема</div><div class="chips">${ch('theme', 'auto', 'Авто', S.set.theme)}${ch('theme', 'dark', 'Темная', S.set.theme)}${ch('theme', 'light', 'Светлая', S.set.theme)}</div></div>` +
     `<div class="item col"><div class="t">Качество графики<small>Если картинка кажется мыльной, выбери Высокое</small></div><div class="chips">${ch('q', 'low', 'Низкое', S.set.q)}${ch('q', 'mid', 'Среднее', S.set.q)}${ch('q', 'high', 'Высокое', S.set.q)}</div></div>` +
     `<div class="item col"><div class="t">Вибрация</div><div class="chips">${ch('haptic', '1', 'Вкл', S.set.haptic ? 1 : 0)}${ch('haptic', '0', 'Выкл', S.set.haptic ? 1 : 0)}</div></div>`;
 }
